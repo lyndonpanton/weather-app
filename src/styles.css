@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+
+    /* background-color: lightblue; */
+    background-clip: padding-box;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/31/Bombina_bombina_1_%28Marek_Szczepanek%29.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+input, select, button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
