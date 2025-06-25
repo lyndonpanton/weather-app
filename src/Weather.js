@@ -3,7 +3,7 @@ class Weather {
         this.apiKey = apiKey;
     }
 
-    async getWeatherData(location, day) {
+    async getWeatherData(location) {
         const query =
                 "https://weather.visualcrossing.com/VisualCrossingWebServices"
                 + "/rest/services/timeline/"
