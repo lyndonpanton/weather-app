@@ -8,7 +8,7 @@ body, html {
 
     /* background-color: lightblue; */
     background-clip: padding-box;
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/31/Bombina_bombina_1_%28Marek_Szczepanek%29.jpg");
+    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/31/Bombina_bombina_1_%28Marek_Szczepanek%29.jpg"); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

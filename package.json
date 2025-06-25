@@ -39,6 +39,9 @@
   "author": "Lyndon Mykal Panton",
   "main": "./src/index.js",
   "scripts": {
+    "build": "webpack",
+    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "dev": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -47,6 +50,7 @@
     "html-webpack-plugin": "^5.6.3",
     "style-loader": "^4.0.0",
     "webpack": "^5.99.9",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   }
 }
