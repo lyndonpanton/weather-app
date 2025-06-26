@@ -8,10 +8,6 @@ class UI {
     }
 
     display() {
-        let text = document.createElement("p");
-        text.textContent = "This is a string";
-
-        this.main.appendChild(text);
         this.main.appendChild(this.createWeatherForm());
     }
 
@@ -19,17 +15,37 @@ class UI {
         const form = document.createElement("form");
         form.setAttribute("id", "weather-form");
 
-        let formLocation = document.createElement("input");
-        formLocation.classList.add("weather-form-location");
-        formLocation.addEventListener("keydown", this.updateLocation.bind(this));
-        formLocation.addEventListener("keyup", this.updateLocation.bind(this));
+        let formLocationLabel = document.createElement("label");
+        formLocationLabel.id = "weather-form-location-label";
+        formLocationLabel.setAttribute("for", "weather-form-location-input");
+        let formLocationText = document.createElement("span");
+        formLocationText.id = "weather-form-location-text";
+        formLocationText.textContent = "What location would you like to search for?";
+        let formLocationInput = document.createElement("input");
+        formLocationInput.id = "weather-form-location-input";
+        formLocationInput.addEventListener("keydown", this.updateLocation.bind(this));
+        formLocationInput.addEventListener("keyup", this.updateLocation.bind(this));
+
+        formLocationLabel.appendChild(formLocationText);
+        formLocationLabel.appendChild(formLocationInput);
 
         // Allow the user to search predicted weather conditions
-        let formDays = document.createElement("input");
-        formDays.type = "number";
-        formDays.addEventListener("keydown", this.updateDay.bind(this));
-        formDays.addEventListener("keyup", this.updateDay.bind(this));
-        formDays.addEventListener("change", this.updateDay.bind(this));
+        let formDaysLabel = document.createElement("label");
+        formDaysLabel.id = "weather-form-days-label";
+        formDaysLabel.setAttribute("for", "weather-form-days-input")
+        let formDaysText = document.createElement("span");
+        formDaysText.id = "weather-form-days-text";
+        formDaysText.textContent = "How many days ahead would you like to search?";
+        let formDaysInput = document.createElement("input");
+        formDaysInput.id = "weather-form-days-input";
+        formDaysInput.value = 0;
+        formDaysInput.type = "number";
+        formDaysInput.addEventListener("keydown", this.updateDay.bind(this));
+        formDaysInput.addEventListener("keyup", this.updateDay.bind(this));
+        formDaysInput.addEventListener("change", this.updateDay.bind(this));
+
+        formDaysLabel.appendChild(formDaysText);
+        formDaysLabel.appendChild(formDaysInput);
         
         let formTemperatureCelsiusLabel = document.createElement("label");
         formTemperatureCelsiusLabel.classList.add("weather-form-temperature-label");
@@ -74,8 +90,8 @@ class UI {
         formSubmit.textContent = "Search";
         formSubmit.type = "submit";
 
-        form.appendChild(formLocation);
-        form.appendChild(formDays);
+        form.appendChild(formLocationLabel);
+        form.appendChild(formDaysLabel);
         form.appendChild(formTemperatureCelsiusLabel);
         form.appendChild(formTemperatureFahrenheitLabel);
         form.appendChild(formSubmit);
@@ -90,14 +106,28 @@ class UI {
         const location = this.location;
         const day = this.day;
 
-        console.log(this.day);
-        console.log(this.location);
-        console.log(this.temperatureType);
-
         let element = document.createElement("p");
 
         try {
             const data = await this.weather.getWeatherData(location);
+
+            if (data.resolvedAddress === undefined) {
+                throw data;
+            }
+
+            let addresses = data.resolvedAddress.split(", ");
+            console.log(addresses);
+
+            let addressFound = false;
+
+            for (let i = 0; i < addresses.length; i++) {
+                if (addresses[i].toLowerCase() == location.toLowerCase()) {
+                    addressFound = true;
+                    break;
+                }
+            }
+
+            if (!addressFound) throw Error("Error: Location not found");
 
             if (parseInt(this.day) === -1) {
                 element.textContent = data.currentConditions;
@@ -108,7 +138,17 @@ class UI {
 
             this.main.appendChild(element);
         } catch (e) {
-            console.log(e);
+            let error = document.createElement("p");
+
+            if (e.message === "Failed to fetch") {
+                error.textContent =
+                        "Error: Invalid characters entered. Please only use "
+                        + "alphabetically characters.";
+            } else {
+                error.textContent = e.message;
+            }
+
+            this.main.appendChild(error);
         }
     }
 

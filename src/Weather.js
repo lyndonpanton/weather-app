@@ -12,9 +12,20 @@ class Weather {
                 + "&key=" + this.apiKey
                 + "&contentType=json";
 
-        const response = await fetch(query, { mode: "cors" });
-        const data = response.json();
-        return data;
+        try {
+            const response = await fetch(query, { mode: "cors" });
+
+            if (!response.ok) {
+                throw new Error("Error: Location not found");
+            } else {
+                const data = response.json();
+                return data;
+            }
+        } catch (e) {
+            let error = document.createElement("p");
+            error.textContent = e.message;
+            return e;
+        }
     }
 }
 
