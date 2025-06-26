@@ -12,6 +12,8 @@ class UI {
     }
 
     createWeatherForm() {
+        // Allow the user to search predicted weather conditions
+        // Allow the user to search for a particular time
         const form = document.createElement("form");
         form.setAttribute("id", "weather-form");
 
@@ -29,7 +31,6 @@ class UI {
         formLocationLabel.appendChild(formLocationText);
         formLocationLabel.appendChild(formLocationInput);
 
-        // Allow the user to search predicted weather conditions
         let formDaysLabel = document.createElement("label");
         formDaysLabel.id = "weather-form-days-label";
         formDaysLabel.setAttribute("for", "weather-form-days-input")
@@ -100,13 +101,40 @@ class UI {
         return form;
     }
 
+    displayCurrentWeatherData(data) {
+        console.log(data);
+    }
+
+    displayFutureWeatherData(data, day) {
+        let location = data.resolvedAddress;
+        let condition = data.days[day].conditions;
+        let date = data.days[day].datetime;
+        let description = data.days[day].description;
+        let feelslike = data.days[day].feelslike;
+        let humidity = data.days[day].humidity;
+        let iconName = data.days[day].icon;
+        // Check what unit of measurement is being used
+        let snow = data.days[day].snow;
+        let sunriseTime = data.days[day].sunrise;
+        let sunsetTime = data.days[day].sunset;
+        let tempatureAverage = data.days[day].temp;
+        let tempatureMin = data.days[day].tempmin;
+        let tempatureMax = data.days[day].tempmax;
+        let uvIndex = data.days[day].uvindex;
+        let visibility = data.days[day].visibility;
+        let windDirection = data.days[day].winddir;
+        let windspeed = data.days[day].windspeed;
+
+        // console.log(data.days[day]);
+        console.log(location);
+        console.log(data.days[day].conditions);
+    }
+
     async getWeatherData(e) {
         e.preventDefault();
 
         const location = this.location;
         const day = this.day;
-
-        let element = document.createElement("p");
 
         try {
             const data = await this.weather.getWeatherData(location);
@@ -129,14 +157,14 @@ class UI {
 
             if (!addressFound) throw Error("Error: Location not found");
 
+            // let location = addresses.join(", ");
+
             if (parseInt(this.day) === -1) {
-                element.textContent = data.currentConditions;
+                this.displayCurrentWeatherData(data);
             } else {
-                console.log(data.days[day]);
-                element.textContent = data.days[day].currentConditions;
+                this.displayFutureWeatherData(data, day);
             }
 
-            this.main.appendChild(element);
         } catch (e) {
             let error = document.createElement("p");
 
