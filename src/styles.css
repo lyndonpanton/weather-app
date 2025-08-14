@@ -1,7 +1,8 @@
 * {
     box-sizing: border-box;
-
-    font-size: 16px;
+    
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
+        sans-serif; 
 }
 
 body, html {
@@ -15,6 +16,10 @@ body, html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
 }
 
 input, select, button {
@@ -48,16 +53,41 @@ input[type="radio"]:checked::before {
 
 /* Header */
 header {
+    height: 10vh;
     text-align: center;
 }
 
 h1 {
     margin: 0;
-    padding: 0;
 
     font-size: 3rem;
 }
 
 /* Main */
+main {
+    display: flex;
+    flex-flow: row;
+}
+
+main > * {
+    border: 1px solid black;
+    width: 100%;
+    padding: 0;
+}
+
+main > *:first-child {
+    width: 90%;
+    height: 91vh;
+}
+
+main > :nth-child(2) {
+    width: 120%;
+    height: 91vh;
+}
+
+main > *:last-child {
+    width: 90%;
+    height: 91vh;
+}
 
 /* Footer */

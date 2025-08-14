@@ -9,9 +9,23 @@ class UI {
     }
 
     display() {
+        this.main.appendChild(this.createWeatherColumnLeft());
         this.main.appendChild(this.createWeatherForm());
+        this.main.appendChild(this.createWeatherColumnRight());
+    }
+    
+    createWeatherColumnLeft() {
+        const column = document.createElement("div");
+
+        return column;
     }
 
+    createWeatherColumnRight() {
+        const column = document.createElement("div");
+
+        return column;
+    }
+    
     createWeatherForm() {
         // Allow the user to search predicted weather conditions
         // Allow the user to search for a particular time
@@ -157,10 +171,10 @@ class UI {
         let windDirection = data.days[day].winddir;
         let windspeed = data.days[day].windspeed;
 
-        // console.log(data.days[day]);
         console.log("Location: " + location);
         console.log("Temperature (averaage): " + tempatureAverage);
-        console.log("Wind speed: " + windspeed); // may depend on this.temperatureType
+        // may depend on this.temperatureType
+        console.log("Wind speed: " + windspeed); 
         console.log("Icon: " + icon);
         console.log("Sunrise: " + sunriseTime);
         console.log("Sunset: " + sunsetTime);
