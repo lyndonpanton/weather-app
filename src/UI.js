@@ -40,6 +40,8 @@ class UI {
         formDaysText.textContent = "How many days ahead would you like to search?";
         let formDaysInput = document.createElement("input");
         formDaysInput.id = "weather-form-days-input";
+        formDaysInput.min = 0;
+        formDaysInput.max = 14;
         formDaysInput.value = 0;
         formDaysInput.type = "number";
         formDaysInput.addEventListener("keydown", this.updateDay.bind(this));
@@ -107,13 +109,42 @@ class UI {
     }
 
     displayFutureWeatherData(data, day) {
+        /*
+            - Center
+                - location
+                - temp
+                - windspeed
+                - icon
+                - sunrise
+                - sunset
+                - conditions
+                - description
+
+            - Left
+                - tempmin
+                - tempmax
+                - feelslike
+                - humidity
+                - snow
+                - winddir
+                - severerisk
+            - Right
+                - visibility
+                - precipitation
+                - precipitation type
+                - cloud cover
+                - uv index
+                - moonphase
+                - stations
+        */
+
         let location = data.resolvedAddress;
         let condition = data.days[day].conditions;
         let date = data.days[day].datetime;
         let description = data.days[day].description;
         let feelslike = data.days[day].feelslike;
         let humidity = data.days[day].humidity;
-        let iconName = data.days[day].icon;
+        let icon = data.days[day].icon;
         // Check what unit of measurement is being used
         let snow = data.days[day].snow;
         let sunriseTime = data.days[day].sunrise;
@@ -127,10 +158,20 @@ class UI {
         let windspeed = data.days[day].windspeed;
 
         // console.log(data.days[day]);
-        console.log(location);
-        console.log(data.days[day].conditions);
+        console.log("Location: " + location);
+        console.log("Temperature (averaage): " + tempatureAverage);
+        console.log("Wind speed: " + windspeed); // may depend on this.temperatureType
+        console.log("Icon: " + icon);
+        console.log("Sunrise: " + sunriseTime);
+        console.log("Sunset: " + sunsetTime);
+        console.log("Conditions: " + condition);
+        console.log("Description: " + description);
 
-        console.log("Average temperature: " + tempatureAverage);
+        if (this.temperatureType) {
+            console.log("Average temperature: " + tempatureAverage + "°F");
+        } else {
+            console.log("Average temperature: " + tempatureAverage + "°C");
+        }
     }
 
     async getWeatherData(e) {

@@ -40,5 +40,11 @@ application.
 ## Credits
 
 - [Lyndon Mykal Panton (Developer)](https://github.com/lyndonpanton)
+- Background image 1
+    - [Dominik Schröder (Creator)](https://unsplash.com/@wirhabenzeit)
+    - [Photo](https://unsplash.com/photos/white-clouds-during-daytime-FIKD9t5_5zQ)
+- Background image 2
+    - [CHUTTERSNAP (Creator)](https://unsplash.com/@chuttersnap)
+    - [Photo](https://unsplash.com/photos/blue-clouds-under-white-sky-9AqIdzEc9pY)
 
 ## References
