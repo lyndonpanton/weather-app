@@ -4,7 +4,8 @@ class UI {
         this.main = document.getElementsByTagName("main")[0];
         this.day = 0;
         this.location = "";
-        this.temperatureType = "";
+        // false: celsius, true: fahrenheit
+        this.temperatureType = false;
     }
 
     display() {
@@ -128,6 +129,8 @@ class UI {
         // console.log(data.days[day]);
         console.log(location);
         console.log(data.days[day].conditions);
+
+        console.log("Average temperature: " + tempatureAverage);
     }
 
     async getWeatherData(e) {
@@ -137,7 +140,10 @@ class UI {
         const day = this.day;
 
         try {
-            const data = await this.weather.getWeatherData(location);
+            const data = await this.weather.getWeatherData(
+                location,
+                this.temperatureType
+            );
 
             if (data.resolvedAddress === undefined) {
                 throw data;
@@ -189,7 +195,9 @@ class UI {
     }
 
     updateTemperatureType(e) {
-        this.temperatureType = e.target.value;
+        this.temperatureType = (e.target.value === "celsius")
+            ? false
+            : true;
     }
 }
 

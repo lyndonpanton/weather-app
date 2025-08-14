@@ -3,12 +3,14 @@ class Weather {
         this.apiKey = apiKey;
     }
 
-    async getWeatherData(location) {
+    async getWeatherData(location, temperatureType) {
+        const unitGroup = temperatureType ? "us" : "uk";
+
         const query =
                 "https://weather.visualcrossing.com/VisualCrossingWebServices"
                 + "/rest/services/timeline/"
                 + location
-                + "?unitGroup=us" 
+                + "?unitGroup=" + unitGroup
                 + "&key=" + this.apiKey
                 + "&contentType=json";
 
