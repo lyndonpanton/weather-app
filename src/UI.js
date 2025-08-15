@@ -468,8 +468,17 @@ class UI {
     }
 
     displayWeatherDataCenter(data) {
-        // convert temperature, windspeed to relevant unit based on
-        // this.temperatureType
+        /*
+            - clear the current content
+            - convert temperature, windspeed to relevant unit based on
+            this.temperatureType
+        */
+
+        const container = this.main.children[1];
+
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
 
         /*
             - Center
@@ -487,7 +496,7 @@ class UI {
         let location = data.resolvedAddress;
         let date = data.days[this.day].datetime;
         let averageTemperature = data.days[this.day].temp;
-        let windspeed = data.days[this.day].windspeed;
+        let windSpeed = data.days[this.day].windspeed;
         let icon = data.days[this.day].icon;
         let sunriseTime = data.days[this.day].sunrise;
         let sunsetTime = data.days[this.day].sunset;
@@ -497,12 +506,68 @@ class UI {
         console.log("Location: " + location);
         console.log("Date: " + date);
         console.log("Temperature: " + averageTemperature);
-        console.log("Wind Speed: " + windspeed);
+        console.log("Wind Speed: " + windSpeed);
         console.log("Icon: " + icon);
         console.log("Sunrise Time: " + sunriseTime);
         console.log("Sunset time: " + sunsetTime);
         console.log("Conditions: " + conditions);
         console.log("Description: " + description);
+
+        const centerContent = document.createElement("div");
+
+        const locationContent = document.createElement("h2");
+        locationContent.classList.add("center-location");
+        locationContent.textContent = location;
+
+        const dateContent = document.createElement("p");
+        dateContent.classList.add("center-date");
+        date = date.split("-").reverse().join("/");
+        dateContent.textContent = date;
+
+        const centerContentContainer = document.createElement("div");
+        // centerContentContainer.classList.add("");
+
+        const iconContent = document.createElement("img");
+        iconContent.classList.add("center-icon");
+        // should be based on the icon
+        iconContent.src = "";
+        iconContent.alt = "A weather icon";
+
+        const temperatureContent = document.createElement("p");
+        temperatureContent.classList.add("center-temperature");
+        temperatureContent.textContent = averageTemperature;
+
+        const windSpeedContent = document.createElement("p");
+        windSpeedContent.classList.add("center-wind-speed");
+        windSpeedContent.textContent = windSpeed;
+
+        const sunriseContent = document.createElement("p");
+        sunriseContent.classList.add("center-sunrise");
+        sunriseTime = sunriseTime.split(":");
+        sunriseTime.pop();
+        sunriseTime = sunriseTime.join(":");
+        sunriseContent.textContent = sunriseTime;
+
+        const sunsetContent = document.createElement("p");
+        sunsetContent.classList.add("center-sunset");
+        sunsetTime = sunsetTime.split(":");
+        sunsetTime.pop();
+        sunsetTime = sunsetTime.join(":");
+        sunsetContent.textContent = sunsetTime;
+
+        centerContent.appendChild(locationContent);
+        centerContent.appendChild(dateContent);
+        
+        centerContentContainer.appendChild(iconContent);
+        centerContentContainer.appendChild(temperatureContent);
+        centerContentContainer.appendChild(windSpeedContent);
+        centerContentContainer.appendChild(sunriseContent);
+        centerContentContainer.appendChild(sunsetContent);
+
+        centerContent.appendChild(centerContentContainer);
+
+        this.main.children[1].appendChild(centerContent);
+        this.displayWeatherForm();
     }
 
     displayWeatherDataLeft(data) {
@@ -551,8 +616,8 @@ class UI {
         */
         
         let visibility = data.days[this.day].visibility;
-        let precipitation = data.days[this.day].precipitation;
-        let precipitationType = data.days[this.day].precipitationtype;
+        let precipitation = data.days[this.day].precip;
+        let precipitationType = data.days[this.day].preciptype;
         let cloudCover = data.days[this.day].cloudcover;
         let uvIndex = data.days[this.day].uvindex;
         let moonphase = data.days[this.day].moonphase;
@@ -581,7 +646,7 @@ class UI {
         formLocationLabel.setAttribute("for", "weather-form-location-input");
         let formLocationText = document.createElement("span");
         formLocationText.id = "weather-form-location-text";
-        formLocationText.textContent = "What location would you like to search for?";
+        formLocationText.textContent = "Location:";
         let formLocationInput = document.createElement("input");
         formLocationInput.id = "weather-form-location-input";
         formLocationInput.required = true;
@@ -596,7 +661,7 @@ class UI {
         formDaysLabel.setAttribute("for", "weather-form-days-input")
         let formDaysText = document.createElement("span");
         formDaysText.id = "weather-form-days-text";
-        formDaysText.textContent = "How many days ahead would you like to search?";
+        formDaysText.textContent = "Days ahead (up to 14):";
         let formDaysInput = document.createElement("input");
         formDaysInput.id = "weather-form-days-input";
         formDaysInput.min = -1;
@@ -610,43 +675,53 @@ class UI {
         formDaysLabel.appendChild(formDaysText);
         formDaysLabel.appendChild(formDaysInput);
         
-        let formTemperatureCelsiusLabel = document.createElement("label");
-        formTemperatureCelsiusLabel.classList.add("weather-form-temperature-label");
-        formTemperatureCelsiusLabel.htmlFor = "weather-form-temperature-celsius";
+        let formUnit = document.createElement("fieldset");
+        formUnit.classList.add("weathre-form-temperature-fieldset");
 
-        let formTemperatureCelsiusText = document.createElement("span");
-        formTemperatureCelsiusText.classList.add("weather-form-temperature-text");
-        formTemperatureCelsiusText.textContent = "Celsius";
-
-        let formTemperatureCelsiusRadio = document.createElement("input");
-        formTemperatureCelsiusRadio.classList.add("weather-form-temperature-radio");
-        formTemperatureCelsiusRadio.id = "weather-form-temperature-celsius";
-        formTemperatureCelsiusRadio.name = "weather-form-temperature";
-        formTemperatureCelsiusRadio.type = "radio";
-        formTemperatureCelsiusRadio.value = "celsius";
-        formTemperatureCelsiusRadio.addEventListener("click", this.updateTemperatureType.bind(this));
-
-        formTemperatureCelsiusLabel.appendChild(formTemperatureCelsiusText);
-        formTemperatureCelsiusLabel.appendChild(formTemperatureCelsiusRadio);
+        let formUnitHeading = document.createElement("caption");
+        formUnitHeading.classList.add("weather-form-temperature-heading");
+        formUnitHeading.textContent = "Unit System";
         
-        let formTemperatureFahrenheitLabel = document.createElement("label");
-        formTemperatureCelsiusLabel.classList.add("weather-form-temperature-label");
-        formTemperatureFahrenheitLabel.htmlFor = "weather-form-temperature-fahrenheit";
+        let formUnitMetricLabel = document.createElement("label");
+        formUnitMetricLabel.classList.add("weather-form-temperature-label");
+        formUnitMetricLabel.htmlFor = "weather-form-temperature-metric";
 
-        let formTemperatureFahrenheitText = document.createElement("span");
-        formTemperatureCelsiusText.classList.add("weather-form-temperature-text");
-        formTemperatureFahrenheitText.textContent = "Fahrenheit";
+        let formUnitMetricText = document.createElement("span");
+        formUnitMetricText.classList.add("weather-form-temperature-text");
+        formUnitMetricText.textContent = "Metric";
 
-        let formTemperatureFahrenheitRadio = document.createElement("input");
-        formTemperatureFahrenheitRadio.classList.add("weather-form-temperature-radio");
-        formTemperatureFahrenheitRadio.id = "weather-form-temperature-fahrenheit";
-        formTemperatureFahrenheitRadio.name = "weather-form-temperature";
-        formTemperatureFahrenheitRadio.type = "radio";
-        formTemperatureFahrenheitRadio.value = "fahrenheit";
-        formTemperatureFahrenheitRadio.addEventListener("click", this.updateTemperatureType.bind(this));
+        let formUnitMetricRadio = document.createElement("input");
+        formUnitMetricRadio.classList.add("weather-form-temperature-radio");
+        formUnitMetricRadio.id = "weather-form-temperature-metric";
+        formUnitMetricRadio.name = "weather-form-temperature";
+        formUnitMetricRadio.type = "radio";
+        formUnitMetricRadio.value = "metric";
+        formUnitMetricRadio.addEventListener("click", this.updateTemperatureType.bind(this));
 
-        formTemperatureFahrenheitLabel.appendChild(formTemperatureFahrenheitText);
-        formTemperatureFahrenheitLabel.appendChild(formTemperatureFahrenheitRadio);
+        formUnitMetricLabel.appendChild(formUnitMetricText);
+        formUnitMetricLabel.appendChild(formUnitMetricRadio);
+        
+        let formUnitImperialLabel = document.createElement("label");
+        formUnitImperialLabel.classList.add("weather-form-temperature-label");
+        formUnitImperialLabel.htmlFor = "weather-form-temperature-imperial";
+
+        let formUnitImperialText = document.createElement("span");
+        formUnitImperialText.classList.add("weather-form-temperature-text");
+        formUnitImperialText.textContent = "Imperial";
+
+        let formUnitImperialRadio = document.createElement("input");
+        formUnitImperialRadio.classList.add("weather-form-temperature-radio");
+        formUnitImperialRadio.id = "weather-form-temperature-imperial";
+        formUnitImperialRadio.name = "weather-form-temperature";
+        formUnitImperialRadio.type = "radio";
+        formUnitImperialRadio.value = "imperial";
+        formUnitImperialRadio.addEventListener("click", this.updateTemperatureType.bind(this));
+
+        formUnitImperialLabel.appendChild(formUnitImperialText);
+        formUnitImperialLabel.appendChild(formUnitImperialRadio);
+
+        formUnit.appendChild(formUnitImperialLabel);
+        formUnit.appendChild(formUnitMetricLabel);
 
         let formSubmit = document.createElement("button");
         formSubmit.classList.add("weather-form-submit");
@@ -655,8 +730,7 @@ class UI {
 
         form.appendChild(formLocationLabel);
         form.appendChild(formDaysLabel);
-        form.appendChild(formTemperatureCelsiusLabel);
-        form.appendChild(formTemperatureFahrenheitLabel);
+        form.appendChild(formUnit);
         form.appendChild(formSubmit);
         
         this.main.children[1].appendChild(form);
