@@ -432,360 +432,342 @@
 
 // export default UI;
 
-class UI {
-    constructor(weather) {
-        this.weather = weather;
-        this.main = document.getElementsByTagName("main")[0];
-        this.day = 0;
-        this.location = "";
-        // false: celsius, true: fahrenheit
-        this.temperatureType = false;
-        this.displayUI();
-    }
+// class UI {
+//     constructor(weather) {
+//         this.weather = weather;
+//         this.main = document.getElementsByTagName("main")[0];
+//         this.day = 0;
+//         this.location = "";
+//         // false: celsius, true: fahrenheit
+//         this.temperatureType = false;
+//         this.displayUI();
+//     }
 
-    displayUI() {
-        // Determine if there is localStorage weather data
-        console.log("Displaying UI...");
-        // this.main.addEventListener("load", this.displayWeatherForm.bind(this));
-        this.main.appendChild(document.createElement("div"));
-        this.main.appendChild(document.createElement("div"));
-        this.main.appendChild(document.createElement("div"));
+//     displayUI() {
+//         // Determine if there is localStorage weather data
+//         console.log("Displaying UI...");
+//         // this.main.addEventListener("load", this.displayWeatherForm.bind(this));
+//         this.main.appendChild(document.createElement("div"));
+//         this.main.appendChild(document.createElement("div"));
+//         this.main.appendChild(document.createElement("div"));
 
-        this.displayWeatherForm();
-    }
+//         this.displayWeatherForm();
+//     }
 
-    async displayWeatherData(e) {
-        e.preventDefault();
+//     async displayWeatherData(e) {
+//         e.preventDefault();
 
-        const weatherData = await this.weather.getWeatherData(this.location, this.day);
+//         const weatherData = await this.weather.getWeatherData(this.location, this.day);
 
-        // Clear and display left data
-        this.displayWeatherDataLeft(weatherData);
-        // Clear and display center data
-        this.displayWeatherDataCenter(weatherData);
-        // Clear and display right data
-        this.displayWeatherDataRight(weatherData);
-    }
+//         // Clear and display left data
+//         this.displayWeatherDataLeft(weatherData);
+//         // Clear and display center data
+//         this.displayWeatherDataCenter(weatherData);
+//         // Clear and display right data
+//         this.displayWeatherDataRight(weatherData);
+//     }
 
-    displayWeatherDataCenter(data) {
-        /*
-            - clear the current content
-            - convert temperature, windspeed to relevant unit based on
-            this.temperatureType
-        */
+//     displayWeatherDataCenter(data) {
+//         /*
+//             - clear the current content
+//             - convert temperature, windspeed to relevant unit based on
+//             this.temperatureType
+//         */
 
-        const container = this.main.children[1];
+//         const container = this.main.children[1];
 
-        while (container.firstChild) {
-            container.removeChild(container.firstChild);
-        }
+//         while (container.firstChild) {
+//             container.removeChild(container.firstChild);
+//         }
 
-        /*
-            - Center
-                - location
-                - date
-                - temp
-                - windspeed
-                - icon
-                - sunrise
-                - sunset
-                - conditions
-                - description
-        */
+//         /*
+//             - Center
+//                 - location
+//                 - date
+//                 - temp
+//                 - windspeed
+//                 - icon
+//                 - sunrise
+//                 - sunset
+//                 - conditions
+//                 - description
+//         */
 
-        let location = data.resolvedAddress;
-        let date = data.days[this.day].datetime;
-        let averageTemperature = data.days[this.day].temp;
-        let windSpeed = data.days[this.day].windspeed;
-        let icon = data.days[this.day].icon;
-        let sunriseTime = data.days[this.day].sunrise;
-        let sunsetTime = data.days[this.day].sunset;
-        let conditions = data.days[this.day].conditions;
-        let description = data.days[this.day].description;
+//         let location = data.resolvedAddress;
+//         let date = data.days[this.day].datetime;
+//         let averageTemperature = data.days[this.day].temp;
+//         let windSpeed = data.days[this.day].windspeed;
+//         let icon = data.days[this.day].icon;
+//         let sunriseTime = data.days[this.day].sunrise;
+//         let sunsetTime = data.days[this.day].sunset;
+//         let conditions = data.days[this.day].conditions;
+//         let description = data.days[this.day].description;
 
-        console.log("Location: " + location);
-        console.log("Date: " + date);
-        console.log("Temperature: " + averageTemperature);
-        console.log("Wind Speed: " + windSpeed);
-        console.log("Icon: " + icon);
-        console.log("Sunrise Time: " + sunriseTime);
-        console.log("Sunset time: " + sunsetTime);
-        console.log("Conditions: " + conditions);
-        console.log("Description: " + description);
+//         const centerContent = document.createElement("div");
 
-        const centerContent = document.createElement("div");
+//         const locationContent = document.createElement("h2");
+//         locationContent.classList.add("center-location");
+//         locationContent.textContent = location;
 
-        const locationContent = document.createElement("h2");
-        locationContent.classList.add("center-location");
-        locationContent.textContent = location;
+//         const dateContent = document.createElement("p");
+//         dateContent.classList.add("center-date");
+//         date = date.split("-").reverse().join("/");
+//         dateContent.textContent = date;
 
-        const dateContent = document.createElement("p");
-        dateContent.classList.add("center-date");
-        date = date.split("-").reverse().join("/");
-        dateContent.textContent = date;
+//         const centerContentContainer = document.createElement("div");
+//         // centerContentContainer.classList.add("");
 
-        const centerContentContainer = document.createElement("div");
-        // centerContentContainer.classList.add("");
+//         const iconContent = document.createElement("img");
+//         iconContent.classList.add("center-icon");
+//         // should be based on the icon
+//         iconContent.src = "";
+//         iconContent.alt = "A weather icon";
 
-        const iconContent = document.createElement("img");
-        iconContent.classList.add("center-icon");
-        // should be based on the icon
-        iconContent.src = "";
-        iconContent.alt = "A weather icon";
+//         const temperatureContent = document.createElement("p");
+//         temperatureContent.classList.add("center-temperature");
+//         temperatureContent.textContent = averageTemperature;
 
-        const temperatureContent = document.createElement("p");
-        temperatureContent.classList.add("center-temperature");
-        temperatureContent.textContent = averageTemperature;
+//         const windSpeedContent = document.createElement("p");
+//         windSpeedContent.classList.add("center-wind-speed");
+//         windSpeedContent.textContent = windSpeed;
 
-        const windSpeedContent = document.createElement("p");
-        windSpeedContent.classList.add("center-wind-speed");
-        windSpeedContent.textContent = windSpeed;
+//         const sunriseContent = document.createElement("p");
+//         sunriseContent.classList.add("center-sunrise");
+//         sunriseTime = sunriseTime.split(":");
+//         sunriseTime.pop();
+//         sunriseTime = sunriseTime.join(":");
+//         sunriseContent.textContent = sunriseTime;
 
-        const sunriseContent = document.createElement("p");
-        sunriseContent.classList.add("center-sunrise");
-        sunriseTime = sunriseTime.split(":");
-        sunriseTime.pop();
-        sunriseTime = sunriseTime.join(":");
-        sunriseContent.textContent = sunriseTime;
+//         const sunsetContent = document.createElement("p");
+//         sunsetContent.classList.add("center-sunset");
+//         sunsetTime = sunsetTime.split(":");
+//         sunsetTime.pop();
+//         sunsetTime = sunsetTime.join(":");
+//         sunsetContent.textContent = sunsetTime;
 
-        const sunsetContent = document.createElement("p");
-        sunsetContent.classList.add("center-sunset");
-        sunsetTime = sunsetTime.split(":");
-        sunsetTime.pop();
-        sunsetTime = sunsetTime.join(":");
-        sunsetContent.textContent = sunsetTime;
-
-        centerContent.appendChild(locationContent);
-        centerContent.appendChild(dateContent);
+//         centerContent.appendChild(locationContent);
+//         centerContent.appendChild(dateContent);
         
-        centerContentContainer.appendChild(iconContent);
-        centerContentContainer.appendChild(temperatureContent);
-        centerContentContainer.appendChild(windSpeedContent);
-        centerContentContainer.appendChild(sunriseContent);
-        centerContentContainer.appendChild(sunsetContent);
+//         centerContentContainer.appendChild(iconContent);
+//         centerContentContainer.appendChild(temperatureContent);
+//         centerContentContainer.appendChild(windSpeedContent);
+//         centerContentContainer.appendChild(sunriseContent);
+//         centerContentContainer.appendChild(sunsetContent);
 
-        centerContent.appendChild(centerContentContainer);
+//         centerContent.appendChild(centerContentContainer);
 
-        this.main.children[1].appendChild(centerContent);
-        this.displayWeatherForm();
-    }
+//         this.main.children[1].appendChild(centerContent);
+//         this.displayWeatherForm();
+//     }
 
-    displayWeatherDataLeft(data) {
-        // convert tempmin, tempmasx, feelslike, etc. to relevant unit based on
-        // this.temperatureType
-        /*
-            - Left
-                - tempmin
-                - tempmax
-                - feelslike
-                - humidity
-                - snow
-                - winddir
-                - severerisk
-        */
+//     displayWeatherDataLeft(data) {
+//         // convert tempmin, tempmasx, feelslike, etc. to relevant unit based on
+//         // this.temperatureType
+//         /*
+//             - Left
+//                 - tempmin
+//                 - tempmax
+//                 - feelslike
+//                 - humidity
+//                 - snow
+//                 - winddir
+//                 - severerisk
+//         */
 
-        let tempatureMin = data.days[this.day].tempmin;
-        let tempatureMax = data.days[this.day].tempmax;
-        let feelslike = data.days[this.day].feelslike;
-        let humidity = data.days[this.day].humidity;
-        // Check what unit of measurement is being used for snow amount
-        let snow = data.days[this.day].snow;
-        let windDirection = data.days[this.day].winddir;
-        let severeRisk = data.days[this.day].severerisk;
+//         let tempatureMin = data.days[this.day].tempmin;
+//         let tempatureMax = data.days[this.day].tempmax;
+//         let feelslike = data.days[this.day].feelslike;
+//         let humidity = data.days[this.day].humidity;
+//         // Check what unit of measurement is being used for snow amount
+//         let snow = data.days[this.day].snow;
+//         let windDirection = data.days[this.day].winddir;
+//         let severeRisk = data.days[this.day].severerisk;
+//     }
 
-        console.log("Minimum temperature: " + tempatureMin);
-        console.log("Maximum temperature: " + tempatureMax);
-        console.log("Feels Like Temperature: " + feelslike);
-        console.log("Humidity: " + humidity);
-        console.log("Snow: " + snow);
-        console.log("Wind Direction: " + windDirection);
-        console.log("Severe Risk: " + severeRisk);
-    }
-
-    displayWeatherDataRight(data) {
-        // convert ??? to relevant unit based on this.temperatureType
-        /*
-            - Right
-                - visibility
-                - precipitation
-                - precipitation type
-                - cloud cover
-                - uv index
-                - moonphase
-                - stations
-        */
+//     displayWeatherDataRight(data) {
+//         // convert ??? to relevant unit based on this.temperatureType
+//         /*
+//             - Right
+//                 - visibility
+//                 - precipitation
+//                 - precipitation type
+//                 - cloud cover
+//                 - uv index
+//                 - moonphase
+//                 - stations
+//         */
         
-        let visibility = data.days[this.day].visibility;
-        let precipitation = data.days[this.day].precip;
-        let precipitationType = data.days[this.day].preciptype;
-        let cloudCover = data.days[this.day].cloudcover;
-        let uvIndex = data.days[this.day].uvindex;
-        let moonphase = data.days[this.day].moonphase;
-        let stations = data.days[this.day].stations;
+//         let visibility = data.days[this.day].visibility;
+//         let precipitation = data.days[this.day].precip;
+//         let precipitationType = data.days[this.day].preciptype;
+//         let cloudCover = data.days[this.day].cloudcover;
+//         let uvIndex = data.days[this.day].uvindex;
+//         let moonphase = data.days[this.day].moonphase;
+//         let stations = data.days[this.day].stations;
         
-        console.log("Visibility: " + visibility);
-        console.log("Precipitation: " + precipitation);
-        console.log("Precipitation Type: " + precipitationType);
-        console.log("Cloud Cover: " + cloudCover);
-        console.log("UV Index: " + uvIndex);
-        console.log("Moon Phase: " + moonphase);
-        console.log("Stations: " + stations);
-    }
+//         // console.log("Visibility: " + visibility);
+//         // console.log("Precipitation: " + precipitation);
+//         // console.log("Precipitation Type: " + precipitationType);
+//         // console.log("Cloud Cover: " + cloudCover);
+//         // console.log("UV Index: " + uvIndex);
+//         // console.log("Moon Phase: " + moonphase);
+//         // console.log("Stations: " + stations);
+//     }
 
-    displayWeatherForm() {
-        // Allow the user to search predicted weather conditions
-        // Allow the user to search for a particular time
-        const form = document.createElement("form");
-        // form.addEventListener("submit", this.displayUpdate);
-        const that = this;
-        form.addEventListener("submit", this.displayWeatherData.bind(that));
-        form.setAttribute("id", "weather-form");
+//     displayWeatherForm() {
+//         // Allow the user to search predicted weather conditions
+//         // Allow the user to search for a particular time
+//         const form = document.createElement("form");
+//         // form.addEventListener("submit", this.displayUpdate);
+//         const that = this;
+//         form.addEventListener("submit", this.displayWeatherData.bind(that));
+//         form.setAttribute("id", "weather-form");
 
-        let formLocationLabel = document.createElement("label");
-        formLocationLabel.id = "weather-form-location-label";
-        formLocationLabel.setAttribute("for", "weather-form-location-input");
-        let formLocationText = document.createElement("span");
-        formLocationText.id = "weather-form-location-text";
-        formLocationText.textContent = "Location:";
-        let formLocationInput = document.createElement("input");
-        formLocationInput.id = "weather-form-location-input";
-        formLocationInput.required = true;
-        formLocationInput.addEventListener("keydown", this.updateLocation.bind(this));
-        formLocationInput.addEventListener("keyup", this.updateLocation.bind(this));
+//         let formLocationLabel = document.createElement("label");
+//         formLocationLabel.id = "weather-form-location-label";
+//         formLocationLabel.setAttribute("for", "weather-form-location-input");
+//         let formLocationText = document.createElement("span");
+//         formLocationText.id = "weather-form-location-text";
+//         formLocationText.textContent = "Location:";
+//         let formLocationInput = document.createElement("input");
+//         formLocationInput.id = "weather-form-location-input";
+//         formLocationInput.required = true;
+//         formLocationInput.addEventListener("keydown", this.updateLocation.bind(this));
+//         formLocationInput.addEventListener("keyup", this.updateLocation.bind(this));
 
-        formLocationLabel.appendChild(formLocationText);
-        formLocationLabel.appendChild(formLocationInput);
+//         formLocationLabel.appendChild(formLocationText);
+//         formLocationLabel.appendChild(formLocationInput);
 
-        let formDaysLabel = document.createElement("label");
-        formDaysLabel.id = "weather-form-days-label";
-        formDaysLabel.setAttribute("for", "weather-form-days-input")
-        let formDaysText = document.createElement("span");
-        formDaysText.id = "weather-form-days-text";
-        formDaysText.textContent = "Days ahead (up to 14):";
-        let formDaysInput = document.createElement("input");
-        formDaysInput.id = "weather-form-days-input";
-        formDaysInput.min = -1;
-        formDaysInput.max = 14;
-        formDaysInput.value = 0;
-        formDaysInput.type = "number";
-        formDaysInput.addEventListener("keydown", this.updateDay.bind(this));
-        formDaysInput.addEventListener("keyup", this.updateDay.bind(this));
-        formDaysInput.addEventListener("change", this.updateDay.bind(this));
+//         let formDaysLabel = document.createElement("label");
+//         formDaysLabel.id = "weather-form-days-label";
+//         formDaysLabel.setAttribute("for", "weather-form-days-input")
+//         let formDaysText = document.createElement("span");
+//         formDaysText.id = "weather-form-days-text";
+//         formDaysText.textContent = "Days ahead (up to 14):";
+//         let formDaysInput = document.createElement("input");
+//         formDaysInput.id = "weather-form-days-input";
+//         formDaysInput.min = -1;
+//         formDaysInput.max = 14;
+//         formDaysInput.value = 0;
+//         formDaysInput.type = "number";
+//         formDaysInput.addEventListener("keydown", this.updateDay.bind(this));
+//         formDaysInput.addEventListener("keyup", this.updateDay.bind(this));
+//         formDaysInput.addEventListener("change", this.updateDay.bind(this));
 
-        formDaysLabel.appendChild(formDaysText);
-        formDaysLabel.appendChild(formDaysInput);
+//         formDaysLabel.appendChild(formDaysText);
+//         formDaysLabel.appendChild(formDaysInput);
         
-        let formUnit = document.createElement("fieldset");
-        formUnit.classList.add("weathre-form-temperature-fieldset");
+//         let formUnit = document.createElement("fieldset");
+//         formUnit.classList.add("weathre-form-temperature-fieldset");
 
-        let formUnitHeading = document.createElement("caption");
-        formUnitHeading.classList.add("weather-form-temperature-heading");
-        formUnitHeading.textContent = "Unit System";
+//         let formUnitHeading = document.createElement("caption");
+//         formUnitHeading.classList.add("weather-form-temperature-heading");
+//         formUnitHeading.textContent = "Unit System";
         
-        let formUnitMetricLabel = document.createElement("label");
-        formUnitMetricLabel.classList.add("weather-form-temperature-label");
-        formUnitMetricLabel.htmlFor = "weather-form-temperature-metric";
+//         let formUnitMetricLabel = document.createElement("label");
+//         formUnitMetricLabel.classList.add("weather-form-temperature-label");
+//         formUnitMetricLabel.htmlFor = "weather-form-temperature-metric";
 
-        let formUnitMetricText = document.createElement("span");
-        formUnitMetricText.classList.add("weather-form-temperature-text");
-        formUnitMetricText.textContent = "Metric";
+//         let formUnitMetricText = document.createElement("span");
+//         formUnitMetricText.classList.add("weather-form-temperature-text");
+//         formUnitMetricText.textContent = "Metric";
 
-        let formUnitMetricRadio = document.createElement("input");
-        formUnitMetricRadio.classList.add("weather-form-temperature-radio");
-        formUnitMetricRadio.id = "weather-form-temperature-metric";
-        formUnitMetricRadio.name = "weather-form-temperature";
-        formUnitMetricRadio.type = "radio";
-        formUnitMetricRadio.value = "metric";
-        formUnitMetricRadio.addEventListener("click", this.updateTemperatureType.bind(this));
+//         let formUnitMetricRadio = document.createElement("input");
+//         formUnitMetricRadio.classList.add("weather-form-temperature-radio");
+//         formUnitMetricRadio.id = "weather-form-temperature-metric";
+//         formUnitMetricRadio.name = "weather-form-temperature";
+//         formUnitMetricRadio.type = "radio";
+//         formUnitMetricRadio.value = "metric";
+//         formUnitMetricRadio.addEventListener("click", this.updateTemperatureType.bind(this));
 
-        formUnitMetricLabel.appendChild(formUnitMetricText);
-        formUnitMetricLabel.appendChild(formUnitMetricRadio);
+//         formUnitMetricLabel.appendChild(formUnitMetricText);
+//         formUnitMetricLabel.appendChild(formUnitMetricRadio);
         
-        let formUnitImperialLabel = document.createElement("label");
-        formUnitImperialLabel.classList.add("weather-form-temperature-label");
-        formUnitImperialLabel.htmlFor = "weather-form-temperature-imperial";
+//         let formUnitImperialLabel = document.createElement("label");
+//         formUnitImperialLabel.classList.add("weather-form-temperature-label");
+//         formUnitImperialLabel.htmlFor = "weather-form-temperature-imperial";
 
-        let formUnitImperialText = document.createElement("span");
-        formUnitImperialText.classList.add("weather-form-temperature-text");
-        formUnitImperialText.textContent = "Imperial";
+//         let formUnitImperialText = document.createElement("span");
+//         formUnitImperialText.classList.add("weather-form-temperature-text");
+//         formUnitImperialText.textContent = "Imperial";
 
-        let formUnitImperialRadio = document.createElement("input");
-        formUnitImperialRadio.classList.add("weather-form-temperature-radio");
-        formUnitImperialRadio.id = "weather-form-temperature-imperial";
-        formUnitImperialRadio.name = "weather-form-temperature";
-        formUnitImperialRadio.type = "radio";
-        formUnitImperialRadio.value = "imperial";
-        formUnitImperialRadio.addEventListener("click", this.updateTemperatureType.bind(this));
+//         let formUnitImperialRadio = document.createElement("input");
+//         formUnitImperialRadio.classList.add("weather-form-temperature-radio");
+//         formUnitImperialRadio.id = "weather-form-temperature-imperial";
+//         formUnitImperialRadio.name = "weather-form-temperature";
+//         formUnitImperialRadio.type = "radio";
+//         formUnitImperialRadio.value = "imperial";
+//         formUnitImperialRadio.addEventListener("click", this.updateTemperatureType.bind(this));
 
-        formUnitImperialLabel.appendChild(formUnitImperialText);
-        formUnitImperialLabel.appendChild(formUnitImperialRadio);
+//         formUnitImperialLabel.appendChild(formUnitImperialText);
+//         formUnitImperialLabel.appendChild(formUnitImperialRadio);
 
-        formUnit.appendChild(formUnitImperialLabel);
-        formUnit.appendChild(formUnitMetricLabel);
+//         formUnit.appendChild(formUnitImperialLabel);
+//         formUnit.appendChild(formUnitMetricLabel);
 
-        let formSubmit = document.createElement("button");
-        formSubmit.classList.add("weather-form-submit");
-        formSubmit.textContent = "Search";
-        formSubmit.type = "submit";
+//         let formSubmit = document.createElement("button");
+//         formSubmit.classList.add("weather-form-submit");
+//         formSubmit.textContent = "Search";
+//         formSubmit.type = "submit";
 
-        form.appendChild(formLocationLabel);
-        form.appendChild(formDaysLabel);
-        form.appendChild(formUnit);
-        form.appendChild(formSubmit);
+//         form.appendChild(formLocationLabel);
+//         form.appendChild(formDaysLabel);
+//         form.appendChild(formUnit);
+//         form.appendChild(formSubmit);
         
-        this.main.children[1].appendChild(form);
-    }
+//         this.main.children[1].appendChild(form);
+//     }
 
-    async getWeatherData() {
-        const location = this.location;
-        const day = this.day;
+//     async getWeatherData() {
+//         const location = this.location;
+//         const day = this.day;
 
-        try {
-            const data = await this.weather.getWeatherData(location, day);
+//         try {
+//             const data = await this.weather.getWeatherData(location, day);
 
-            if (data.resolvedAddress === undefined) {
-                throw data;
-            }
+//             if (data.resolvedAddress === undefined) {
+//                 throw data;
+//             }
 
-            let addresses = data.resolvedAddress.split(", ");
-            let addressFound = false;
+//             let addresses = data.resolvedAddress.split(", ");
+//             let addressFound = false;
 
-            for (let i = 0; i < addresses.length; i++) {
-                if (addresses[i].toLowerCase() == location.toLowerCase()) {
-                    addressFound = true;
-                    break;
-                }
-            }
+//             for (let i = 0; i < addresses.length; i++) {
+//                 if (addresses[i].toLowerCase() == location.toLowerCase()) {
+//                     addressFound = true;
+//                     break;
+//                 }
+//             }
 
-            if (!addressFound) {
-                throw Error("Error: Location not found")
-                // return null;
-            };
+//             if (!addressFound) {
+//                 throw Error("Error: Location not found")
+//                 // return null;
+//             };
 
 
-        } catch (e) {
-            throw Error(
-                "Error: Invalid characters entered. Please only use "
-                + "alphabetical characters."
-            );
-            // return null;
-        }
-    }
+//         } catch (e) {
+//             throw Error(
+//                 "Error: Invalid characters entered. Please only use "
+//                 + "alphabetical characters."
+//             );
+//             // return null;
+//         }
+//     }
 
-    updateDay(e) {
-        this.day = e.target.value
-    }
+//     updateDay(e) {
+//         this.day = e.target.value
+//     }
 
-    updateLocation(e) {
-        this.location = e.target.value;
-    }
+//     updateLocation(e) {
+//         this.location = e.target.value;
+//     }
 
-    updateTemperatureType(e) {
-        this.temperatureType = (e.target.value === "celsius") ? false : true;
-    }
-}
+//     updateTemperatureType(e) {
+//         this.temperatureType = e.target.value === "metric";
+//     }
+// }
 
-export default UI;
+// export default UI;
 
 /*
     - MVP
@@ -811,3 +793,155 @@ export default UI;
         - Use local storage to remember last location searched for, and load
         that data on page load (store: day, location, temperature type)
 */
+
+class UI {
+    constructor(weather) {
+        this.weather = weather;
+        this.main = document.getElementsByTagName("main")[0];
+        this.day = 0;
+        this.location = "";
+        // false: celsius, true: fahrenheit
+        this.temperatureType = false;
+        
+        this.displayUI();
+    }
+
+    displayUI() {
+        // Save location on successful search
+        // Use location storage location on load
+
+        this.displayWeatherForm();
+    }
+
+    displayWeatherForm() {
+        const form = document.createElement("form");
+        form.id = "weather-form";
+        form.addEventListener("submit", this.getWeatherData.bind(this));
+
+        // Toggle (custom)
+        let formToggle;
+
+        // Input
+        let formInput = document.createElement("input");
+        formInput.classList.add("weather-form-input");
+        formInput.placeholder = "Location";
+        formInput.type = "text";
+        formInput.addEventListener("keydown", this.updateLocation.bind(this));
+        formInput.addEventListener("keyup", this.updateLocation.bind(this));
+
+        // Button
+        let formSubmit = document.createElement("input");
+        formSubmit.classList.add("weather-form-submit");
+        formSubmit.type = "submit";
+        formSubmit.value = "Search";
+
+        // form.appendChild(formToggle);
+        form.appendChild(formInput);
+        form.appendChild(formSubmit);
+
+        this.main.appendChild(form);
+    }
+
+    async displayWeatherData(data) {
+
+        /*
+            - Top
+                - Location
+                - Date
+            - Middle
+                - Temperature
+                - Icon
+                    - Sunrise (dotted underline for description)
+                    - Sunset (dotted underline for description)
+                - Conditions
+                    - Stations (dotted underline for details)
+            - Other (12, use dotted underline for description)
+                - Windspeed
+                - Winddir
+                - Feelslike
+                - Humidity
+                - Snow
+                - Severerisk
+                - Visibility
+                - Precipitation
+                - Cloud Cover
+                - UV Index
+                - Moonphase
+            - Forecast (next 6 days)
+                - Day
+                - Icon
+                - Temperature
+                - Conditions
+        */
+       
+        console.log(data.days)
+
+        this.displayWeatherDataCurrent();
+        this.displayWeatherDataFuture();
+    }
+
+    displayWeatherDataCurrent(data) {
+        // clear previous current weather data
+
+        // display current current weather data
+    }
+    
+    displayWeatherDataFuture(data) {
+        // clear previous current weather data
+    
+        // display current current weather data
+    }
+
+    async getWeatherData(e) {
+        e.preventDefault();
+
+        const location = this.location;
+        const temperatureType = this.temperatureType;
+
+        try {
+            const data = await this.weather.getWeatherData(
+                location,
+                temperatureType
+            );
+
+            if (data.resolvedAddress === undefined) {
+                throw data;
+            }
+
+            let addresses = data.resolvedAddress.split(", ");
+            let addressFound = false;
+
+            for (let i = 0; i < addresses.length; i++) {
+                if (addresses[i].toLowerCase() === location.toLowerCase()) {
+                    addressFound = true;
+                    break;
+                }
+            }
+
+            if (!addressFound) {
+                throw Error("Error: Location not found");
+                // return null;
+            }
+
+            this.displayWeatherData(data);
+
+        } catch (e) {
+            throw Error(
+                "Error: Invalid characters entered. Please only use "
+                + "alphabetical characters."
+            )
+
+            // return null;
+        }
+    }
+
+    updateLocation(e) {
+        this.location = e.target.value;
+    }
+    
+    updateTemperatureType(e) {
+        this.temperatureType = e.target.value == "metric";
+    }
+}
+
+export default UI;

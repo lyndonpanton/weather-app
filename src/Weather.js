@@ -4,7 +4,8 @@ class Weather {
     }
 
     async getWeatherData(location, temperatureType) {
-        const unitGroup = temperatureType ? "us" : "uk";
+        const unitGroup = temperatureType ? "uk" : "us";
+        console.log(unitGroup);
 
         const query =
                 "https://weather.visualcrossing.com/VisualCrossingWebServices"
