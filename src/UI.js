@@ -802,7 +802,7 @@ class UI {
         this.location = "";
         // false: celsius, true: fahrenheit
         this.temperatureType = false;
-        
+
         this.displayUI();
     }
 
@@ -819,7 +819,20 @@ class UI {
         form.addEventListener("submit", this.getWeatherData.bind(this));
 
         // Toggle (custom)
-        let formToggle;
+        let formToggle = document.createElement("label");
+        formToggle.classList.add("weather-form-unit");
+        let formToggleCheckbox = document.createElement("input");
+        formToggleCheckbox.classList.add("weather-form-unit-checkbox");
+        formToggleCheckbox.type = "checkbox";
+        formToggleCheckbox.addEventListener(
+            "change",
+            this.updateTemperatureType.bind(this)
+        );
+        let formToggleSlider = document.createElement("span");
+        formToggleSlider.classList.add("weather-form-unit-slider");
+
+        formToggle.appendChild(formToggleCheckbox);
+        formToggle.appendChild(formToggleSlider);
 
         // Input
         let formInput = document.createElement("input");
@@ -835,7 +848,7 @@ class UI {
         formSubmit.type = "submit";
         formSubmit.value = "Search";
 
-        // form.appendChild(formToggle);
+        form.appendChild(formToggle);
         form.appendChild(formInput);
         form.appendChild(formSubmit);
 
@@ -940,7 +953,10 @@ class UI {
     }
     
     updateTemperatureType(e) {
-        this.temperatureType = e.target.value == "metric";
+        let element = e.target.parentElement.children[1];
+        let styles = window.getComputedStyle(element, "::before");
+        // styles.content returns a string containing quotations
+        this.temperatureType = styles.content.slice(1, 3) === "Im";
     }
 }
 

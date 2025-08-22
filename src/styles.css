@@ -1,3 +1,4 @@
+/* General ********************************************************************/
 * {
     box-sizing: border-box;
     
@@ -51,7 +52,7 @@ input[type="radio"]:checked::before {
     background-color: black;
 }
 
-/* Header */
+/* Header *********************************************************************/
 header {
     height: 10vh;
     text-align: center;
@@ -63,63 +64,92 @@ h1 {
     font-size: 3rem;
 }
 
-/* Main */
-main {
-    display: flex;
-    flex-flow: row;
-}
-
+/* Main ***********************************************************************/
 main {
     width: 100%;
     padding: 0;
 }
 
-.center {
+/* Toggle input */
+.weather-form-unit {
+    display: inline-block;
+    position: relative;
 
+    width: 60px;
+    height: 34px;
+
+    font-size: 0.8rem;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.center-city {
-
+.weather-form-unit-checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.center-date {
+.weather-form-unit-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
+    /* background-color: #CCCCCC; */
+    background-color: #21F296;
+
+    -ms-transition: 0.4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+
+    cursor: pointer;
 }
 
-.center-icon {
+.weather-form-unit-slider::before {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
 
+    content: "";
+
+    width: 26px;
+    height: 26px;
+
+    background-color: #FFFFFF;
+
+    -ms-transition: 0.4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
 
-.center-conditions {
-    
+.weather-form-unit-checkbox:checked + .weather-form-unit-slider {
+    background-color: #2196F3;
 }
 
-.center-temperature {
-
+.weather-form-unit-checkbox:focus + .weather-form-unit-slider {
+    box-shadow: 0 0 1px #2196F3;
 }
 
-.center-wind-speed {
-
+.weather-form-unit-checkbox:not(:checked) + .weather-form-unit-slider:before {
+    content: "Me";
 }
 
-.center-sunrise {
+.weather-form-unit-checkbox:checked + .weather-form-unit-slider:before {
+    content: "Im";
 
+    -ms-transform: translateX(26px);
+    -webkit-transform: translateX(26px);
+    transform: translateX(26px);
 }
 
-.center-sunset {
-
+.weather-form-unit-slider {
+    border-radius: 34px;
 }
 
-.center-description {
-    
+.weather-form-unit-slider:before {
+    line-height: 24px;
+    border-radius: 50%;
 }
 
-.left {
-
-}
-
-.right {
-
-}
-
-/* Footer */
+/* Footer *********************************************************************/
