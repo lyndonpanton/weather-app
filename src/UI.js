@@ -801,7 +801,7 @@ class UI {
         this.day = 0;
         this.location = "";
         // false: celsius, true: fahrenheit
-        this.temperatureType = false;
+        this.temperatureType = true;
 
         this.displayUI();
     }
@@ -856,11 +856,48 @@ class UI {
     }
 
     async displayWeatherData(data) {
+        this.displayWeatherDataCurrent(data);
+        this.displayWeatherDataFuture(data);
+    }
+
+    displayWeatherDataCurrent(data) {
+        // clear previous current weather data
+        const previousContainer = document.getElementById("weather-current");
+        
+        if (previousContainer) {
+            previousContainer.parentElement.removeChild(previousContainer);
+        }
+
+        // display current current weather data
 
         /*
             - Top
                 - Location
                 - Date
+        */
+        let day = data.days[0];
+        console.log(day);
+        
+        const currentContainer = document.createElement("article");
+        currentContainer.id = "weather-current";
+
+        let containerHeader = document.createElement("div");
+        containerHeader.classList.add("weather-current-header");
+        
+        let location = document.createElement("h2");
+        location.classList.add("weather-current-location");
+        location.textContent = this.location;
+
+        let date = document.createElement("p");
+        date.classList.add("weather-current-date");
+        date.textContent = day.datetime.split("-").reverse().join("/");
+
+        containerHeader.appendChild(location);
+        containerHeader.appendChild(date);
+
+        currentContainer.appendChild(containerHeader);
+
+        /*
             - Middle
                 - Temperature
                 - Icon
@@ -868,6 +905,48 @@ class UI {
                     - Sunset (dotted underline for description)
                 - Conditions
                     - Stations (dotted underline for details)
+        */
+
+        let containerMain = document.createElement("div");
+        containerMain.classList.add("weather-current-main");
+
+        let temperature = document.createElement("p");
+        temperature.classList.add("weather-current-temperature");
+        temperature.textContent = day.temp;
+
+        let icon = document.createElement("img");
+        icon.classList.add("weather-current-icon");
+        // depends on: day.icon
+        icon.src = "";
+        icon.alt = "";
+
+        let sunrise = document.createElement("span");
+        sunrise.classList.add(
+            "weather-current-suntime",
+            "weather-current-suntime-sunrise"
+        );
+        sunrise.textContent = day.sunrise.slice(
+            0,
+            day.sunrise.lastIndexOf(":")
+        );
+        let sunset = document.createElement("span");
+        sunset.classList.add(
+            "weather-current-suntime",
+            "weather-current-suntime-sunset"
+        );
+        sunset.textContent = day.sunset.slice(
+            0,
+            day.sunset.lastIndexOf(":")
+        );
+
+        containerMain.appendChild(temperature);
+        // containerMain.appendChild(icon);
+        containerMain.appendChild(sunrise);
+        containerMain.appendChild(sunset);
+
+        currentContainer.appendChild(containerMain);
+
+        /*
             - Other (12, use dotted underline for description)
                 - Windspeed
                 - Winddir
@@ -880,29 +959,28 @@ class UI {
                 - Cloud Cover
                 - UV Index
                 - Moonphase
-            - Forecast (next 6 days)
-                - Day
-                - Icon
-                - Temperature
-                - Conditions
         */
-       
-        console.log(data.days)
+        let containerFooter = document.createElement("div");
+        containerFooter.classList.add("weather-current-footer");
 
-        this.displayWeatherDataCurrent();
-        this.displayWeatherDataFuture();
-    }
+        // currentContainer.appendChild(containerFooter);
 
-    displayWeatherDataCurrent(data) {
-        // clear previous current weather data
-
-        // display current current weather data
+        this.main.appendChild(currentContainer);
     }
     
     displayWeatherDataFuture(data) {
         // clear previous current weather data
     
         // display current current weather data
+        for (let i = 1; i < data.days.length; i++) {
+            /*
+                - Forecast (next 6 days)
+                    - Day
+                    - Icon
+                    - Temperature
+                    - Conditions
+            */
+        }
     }
 
     async getWeatherData(e) {
@@ -956,7 +1034,7 @@ class UI {
         let element = e.target.parentElement.children[1];
         let styles = window.getComputedStyle(element, "::before");
         // styles.content returns a string containing quotations
-        this.temperatureType = styles.content.slice(1, 3) === "Im";
+        this.temperatureType = styles.content.slice(1, 3) === "Me";
     }
 }
 

@@ -8,6 +8,9 @@ import Weather from "./Weather";
 const weather = new Weather("ZWAYBTGS53V42U9XFL589UQS7");
 const ui = new UI(weather);
 
+const year = document.getElementById("current-year");
+year.textContent = new Date().getFullYear();
+
 // ui.display();
 // ui.displayUI();
 // ui.createWeatherForm();
