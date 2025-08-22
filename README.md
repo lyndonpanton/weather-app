@@ -47,5 +47,6 @@ application.
     - [CHUTTERSNAP (Creator)](https://unsplash.com/@chuttersnap)
     - [Photo](https://unsplash.com/photos/blue-clouds-under-white-sky-9AqIdzEc9pY)
 - [Custom toggle | w3schools](https://www.w3schools.com/howto/howto_css_switch.asp)
+- [Weather icons | Visual Crossing](https://github.com/visualcrossing/WeatherIcons/tree/main/PNG/2nd%20Set%20-%20Color)
 
 ## References
