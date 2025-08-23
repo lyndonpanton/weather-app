@@ -963,7 +963,101 @@ class UI {
         let containerFooter = document.createElement("div");
         containerFooter.classList.add("weather-current-footer");
 
-        // currentContainer.appendChild(containerFooter);
+        let windSpeed = document.createElement("p");
+        windSpeed.classList.add("weather-current-wind-speed");
+        windSpeed.textContent = this.temperatureType
+            ? day.windspeed + "mph"
+            : day.windspeed + "km/h";
+
+        let windDirection = document.createElement("p");
+        windDirection.classList.add("weather-current-wind-direction");
+        windDirection.textContent = day.winddir + " deg";
+
+        let humidity = document.createElement("p");
+        humidity.classList.add("weather-current-humidity");
+        humidity.textContent = day.humidity + "%";
+
+        let snow = document.createElement("p");
+        snow.classList.add("weather-current-snow");
+        snow.textContent = this.temperatureType
+            ? day.snow + "cm"
+            : day.snow + "in";
+
+        let severeRisk = document.createElement("p");
+        severeRisk.classList.add("weather-current-severe-risk");
+        severeRisk.textContent = day.severerisk;
+
+        let visibility = document.createElement("p");
+        visibility.classList.add("weather-current-visibility");
+        visibility.textContent = this.temperatureType
+            ? day.visibility + "km"
+            : day.visibility + " miles";
+
+        let precipitationType = document.createElement("p");
+        precipitationType.classList.add("weather-current-precipitation-type");
+        precipitationType.textContent = day.preciptype;
+
+        let precipitationAmount = document.createElement("p");
+        precipitationAmount.classList.add("weather-current-precipitationAmount");
+        precipitationAmount.textContent = this.temperatureType
+            ? day.precip + "mm"
+            : day.precip + "in";
+
+        let cloudCover = document.createElement("p");
+        cloudCover.classList.add("weather-current-cloud-cover");
+        cloudCover.textContent = day.cloudcover + "%";
+
+        // 0 -> low, 10 -> high
+        let uvIndex = document.createElement("p");
+        uvIndex.classList.add("weather-current-uv-index");
+        uvIndex.textContent = day.uvindex;
+
+        let moonphase = document.createElement("p");
+        moonphase.classList.add("weather-current-moon-phsae");
+
+        if (day.moonphase === 0) {
+            moonphase.textContent = "New Moon (1 / 8)";
+        } else if (day.moonphase <= 0.25) {
+            moonphase.textContent = "Waxing Crescent (2 / 8)";
+        } else if (day.moonphase === 0.25) {
+            moonphase.textContent = "First Quarter (3 / 8)";
+        } else if (day.moonphase <= 0.5) {
+            moonphase.textContent = "Waxing Gibbous (4 / 8)";
+        } else if (day.moonphase === 0.5) {
+            moonphase.textContent = "Full Moon (5 / 8)";
+        } else if (day.moonphase <= 0.75) {
+            moonphase.textContent = "Waning Gibbous (6 / 8)";
+        } else if (day.moonphase === 0.75) {
+            moonphase.textContent = "Last Quarter (7 / 8)";
+        } else {
+            moonphase.textContent = "Waning Crecent (8 / 8)";
+        }
+
+        console.log("Wind speed: " + windSpeed.textContent);
+        console.log("Wind direction: " + windDirection.textContent);
+        console.log("Humidity: " + humidity.textContent);
+        console.log("Snow: " + snow.textContent);
+        console.log("Severe risk: " + severeRisk.textContent);
+        console.log("Visibility: " + visibility.textContent);
+        console.log("Precipitation type: " + precipitationType.textContent);
+        console.log("Precipitation amount: " + precipitationAmount.textContent);
+        console.log("Cloud cover: " + cloudCover.textContent);
+        console.log("UV index: " + uvIndex.textContent);
+        console.log("Moonphase: " + moonphase.textContent);
+
+        containerFooter.appendChild(windSpeed);
+        containerFooter.appendChild(windDirection);
+        containerFooter.appendChild(humidity);
+        containerFooter.appendChild(snow);
+        containerFooter.appendChild(severeRisk);
+        containerFooter.appendChild(visibility);
+        containerFooter.appendChild(precipitationType);
+        containerFooter.appendChild(precipitationAmount);
+        containerFooter.appendChild(cloudCover);
+        containerFooter.appendChild(uvIndex);
+        containerFooter.appendChild(moonphase);
+
+        currentContainer.appendChild(containerFooter);
 
         this.main.appendChild(currentContainer);
     }
