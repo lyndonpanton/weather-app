@@ -836,7 +836,7 @@ class UI {
 
         // Input
         let formInput = document.createElement("input");
-        formInput.classList.add("weather-form-input");
+        formInput.classList.add("weather-form-location");
         formInput.placeholder = "Location";
         formInput.type = "text";
         formInput.addEventListener("keydown", this.updateLocation.bind(this));
@@ -1032,18 +1032,6 @@ class UI {
         } else {
             moonphase.textContent = "Waning Crecent (8 / 8)";
         }
-
-        console.log("Wind speed: " + windSpeed.textContent);
-        console.log("Wind direction: " + windDirection.textContent);
-        console.log("Humidity: " + humidity.textContent);
-        console.log("Snow: " + snow.textContent);
-        console.log("Severe risk: " + severeRisk.textContent);
-        console.log("Visibility: " + visibility.textContent);
-        console.log("Precipitation type: " + precipitationType.textContent);
-        console.log("Precipitation amount: " + precipitationAmount.textContent);
-        console.log("Cloud cover: " + cloudCover.textContent);
-        console.log("UV index: " + uvIndex.textContent);
-        console.log("Moonphase: " + moonphase.textContent);
 
         containerFooter.appendChild(windSpeed);
         containerFooter.appendChild(windDirection);
