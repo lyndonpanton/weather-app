@@ -189,10 +189,35 @@ main {
     font-size: 1.2rem;
 }
 
-/* weather data top row */
+/* current weather data container */
+#weather-current {
+    margin: 0 auto;
+    width: 70%;
+    text-align: center;
+}
 
-/* weather data middle row */
+/* current weather data top row */
+.weather-current-header {
 
-/* weather data bottom row */
+}
+
+.weather-current-location {
+    margin: 20px 0 0;
+    padding: 0;
+
+
+    font-size: 2.8rem;
+}
+
+.weather-current-date {
+    margin: 10px 0;
+    padding: 0;
+
+    font-size: 1.2rem;
+}
+
+/* current weather data middle row */
+
+/* current weather data bottom row */
 
 /* Footer *********************************************************************/
