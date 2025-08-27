@@ -247,7 +247,7 @@ main {
 .weather-current-sun-time {
     display: flex;
     justify-content: center;
-    gap: 64px;
+    gap: 144px;
 }
 
 .weather-current-sun {
@@ -277,7 +277,36 @@ main {
 
 /* current weather data footer row */
 .weather-current-footer {
+    /* display: grid;
+    grid-template-columns: repeat(4, 1fr); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
+    margin-top: 40px;
+    font-size: 1.1rem;
+}
+
+.weather-current-footer > * {
+    width: 25%;
+}
+
+.weather-current-uv-index-value {
+    text-decoration-color: black;
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-style: dotted;
+
+    cursor: pointer;
+}
+
+.weather-current-moon-phase-value {
+    text-decoration-color: black;
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-style: dotted;
+
+    cursor: pointer;
 }
 
 /* Footer *********************************************************************/

@@ -789,6 +789,10 @@
             - updateDay
             - updateLocation
             - updateTemperatureType
+        - Error handling
+            - Invalid location entered
+        - Styling
+            - Underline values for extra weather data
     - Extensions
         - Use local storage to remember last location searched for, and load
         that data on page load (store: day, location, temperature type)
@@ -1016,7 +1020,6 @@ class UI {
             case "wind":
                 icon.src = windIcon;
                 break;
-                break;
             default:
                 console.log("Error: Icon not found");
         }
@@ -1028,6 +1031,7 @@ class UI {
         containerSunTime.classList.add("weather-current-sun-time");
 
         let sunrise = document.createElement("p");
+        sunrise.title = "Sunrise time";
         sunrise.classList.add(
             "weather-current-sun",
             "weather-current-sunrise"
@@ -1037,6 +1041,7 @@ class UI {
             day.sunrise.lastIndexOf(":")
         );
         let sunset = document.createElement("p");
+        sunset.title = "Sunset time";
         sunset.classList.add(
             "weather-current-sun",
             "weather-current-sunset"
@@ -1082,80 +1087,153 @@ class UI {
         let windSpeed = document.createElement("p");
         windSpeed.classList.add("weather-current-wind-speed");
         windSpeed.textContent = this.temperatureType
-            ? day.windspeed + "mph"
-            : day.windspeed + "km/h";
+            ? "Wind speed: " + day.windspeed + "mph"
+            : "Wind speed: " + day.windspeed + "km/h";
 
+        // Denote compass wind direction in brackets (e.g., N, NE)
         let windDirection = document.createElement("p");
         windDirection.classList.add("weather-current-wind-direction");
-        windDirection.textContent = day.winddir + "°";
+        let shorthandWindDirection;
+
+        if (day.winddir < 20 || day.winddir > 340) {
+            shorthandWindDirection = "N";
+        } else if (day.winddir >= 20 && day.winddir <= 70) {
+            shorthandWindDirection = "NE";
+        } else if (day.winddir > 70 && day.winddir < 110) {
+            shorthandWindDirection = "E";
+        } else if (day.winddir >= 110 && day.winddir <= 160) {
+            shorthandWindDirection = "SE";
+        } else if (day.winddir > 160 && day.winddir < 200) {
+            shorthandWindDirection = "S";
+        } else if (day.winddir >= 200 && day.winddir <= 250) {
+            shorthandWindDirection = "SW";
+        } else if (day.winddir > 250 && day.winddir < 290) {
+            shorthandWindDirection = "W";
+        } else {
+            shorthandWindDirection = "NW";
+        }
+
+        windDirection.textContent =
+            "Wind direction: " + day.winddir + "°"
+            + "(" + shorthandWindDirection + ")";
 
         let humidity = document.createElement("p");
         humidity.classList.add("weather-current-humidity");
-        humidity.textContent = day.humidity + "%";
+        humidity.textContent = "Humidity: " + day.humidity + "%";
 
         let snow = document.createElement("p");
         snow.classList.add("weather-current-snow");
         snow.textContent = this.temperatureType
-            ? day.snow + "cm"
-            : day.snow + "in";
+            ? "Snow coverage: " + day.snow + "cm"
+            : "Snow coverage: " + day.snow + "in";
 
-        let severeRisk = document.createElement("p");
-        severeRisk.classList.add("weather-current-severe-risk");
-        severeRisk.textContent = day.severerisk;
+        // add text-based message in brackets
+        // let severeRisk = document.createElement("p");
+        // severeRisk.classList.add("weather-current-severe-risk");
+        // severeRisk.textContent = "Severe risk: " + day.severerisk;
 
         let visibility = document.createElement("p");
         visibility.classList.add("weather-current-visibility");
         visibility.textContent = this.temperatureType
-            ? day.visibility + "km"
-            : day.visibility + " miles";
+            ? "Visibility: " + day.visibility + "km"
+            : "Visibility: " + day.visibility + " miles";
 
-        let precipitationType = document.createElement("p");
-        precipitationType.classList.add("weather-current-precipitation-type");
-        precipitationType.textContent = day.preciptype;
+        // let precipitationType = document.createElement("p");
+        // precipitationType.classList.add("weather-current-precipitation-type");
+        // precipitationType.textContent = day.preciptype;
 
         let precipitationAmount = document.createElement("p");
         precipitationAmount.classList.add("weather-current-precipitationAmount");
         precipitationAmount.textContent = this.temperatureType
-            ? day.precip + "mm"
-            : day.precip + "in";
+            ? "Precipitation coverage: " + day.precip + "mm"
+            : "Precipitation coverage: " + day.precip + "in";
 
         let cloudCover = document.createElement("p");
         cloudCover.classList.add("weather-current-cloud-cover");
-        cloudCover.textContent = day.cloudcover + "%";
+        cloudCover.textContent = "Cloud coverage: " + day.cloudcover + "%";
 
-        // 0 -> low, 10 -> high
+        // add dotted underline styling and supply a tooltip with protection
+        // recommendation depending on the UV index
+        // (https://www.uvindextoday.com/uv-index-scale)
         let uvIndex = document.createElement("p");
         uvIndex.classList.add("weather-current-uv-index");
-        uvIndex.textContent = day.uvindex;
+        uvIndex.textContent = "UV Index: " + day.uvindex;
+        let uvIndexValue = document.createElement("span");
+        uvIndexValue.classList.add("weather-current-uv-index-value");
+
+        switch (day.uvindex) {
+            case 0:
+            case 1:
+            case 2:
+                uvIndexValue.textContent += " (low)";
+                uvIndexValue.title = "No protection needed"
+                break;
+            case 3:
+            case 4:
+            case 5:
+                uvIndexValue.textContent += " (moderate)";
+                uvIndexValue.title = "Some protection needed"
+                break;
+            case 6:
+            case 7:
+                uvIndexValue.textContent += " (high)";
+                uvIndexValue.title = "Protection essential"
+                break;
+            case 8:
+            case 9:
+            case 10:
+                uvIndexValue.textContent += " (very high)";
+                uvIndexValue.title = "Extra protection is needed"
+                break;
+            default:
+                uvIndexValue.textContent += " (extreme)";
+                uvIndexValue.title = "Stay inside"
+                break;
+        }
+
+        uvIndex.appendChild(uvIndexValue);
 
         let moonphase = document.createElement("p");
-        moonphase.classList.add("weather-current-moon-phsae");
+        moonphase.classList.add("weather-current-moon-phase");
+        moonphase.textContent = "Moonphase: ";
+        let moonphaseValue = document.createElement("span");
+        moonphaseValue.classList.add("weather-current-moon-phase-value");
 
         if (day.moonphase === 0) {
-            moonphase.textContent = "New Moon (1 / 8)";
+            moonphaseValue.textContent += "New Moon";
+            moonphaseValue.title = "Phase 1 of 8";
         } else if (day.moonphase <= 0.25) {
-            moonphase.textContent = "Waxing Crescent (2 / 8)";
+            moonphaseValue.textContent += "Waxing Crescent";
+            moonphaseValue.title = "Phase 2 of 8";
         } else if (day.moonphase === 0.25) {
-            moonphase.textContent = "First Quarter (3 / 8)";
+            moonphaseValue.textContent += "First Quarter";
+            moonphaseValue.title = "Phase 3 of 8";
         } else if (day.moonphase <= 0.5) {
-            moonphase.textContent = "Waxing Gibbous (4 / 8)";
+            moonphaseValue.textContent += "Waxing Gibbous";
+            moonphaseValue.title = "Phase 4 of 8";
         } else if (day.moonphase === 0.5) {
-            moonphase.textContent = "Full Moon (5 / 8)";
+            moonphaseValue.textContent += "Full Moon";
+            moonphaseValue.title = "Phase 5 of 8";
         } else if (day.moonphase <= 0.75) {
-            moonphase.textContent = "Waning Gibbous (6 / 8)";
+            moonphaseValue.textContent += "Waning Gibbous";
+            moonphaseValue.title = "Phase 6 of 8";
         } else if (day.moonphase === 0.75) {
-            moonphase.textContent = "Last Quarter (7 / 8)";
+            moonphaseValue.textContent += "Last Quarter";
+            moonphaseValue.title = "Phase 7 of 8";
         } else {
-            moonphase.textContent = "Waning Crecent (8 / 8)";
+            moonphaseValue.textContent += "Waning Crecent";
+            moonphaseValue.title = "Phase 8 of 8";
         }
+
+        moonphase.appendChild(moonphaseValue);
 
         containerFooter.appendChild(windSpeed);
         containerFooter.appendChild(windDirection);
         containerFooter.appendChild(humidity);
         containerFooter.appendChild(snow);
-        containerFooter.appendChild(severeRisk);
+        // containerFooter.appendChild(severeRisk);
         containerFooter.appendChild(visibility);
-        containerFooter.appendChild(precipitationType);
+        // containerFooter.appendChild(precipitationType);
         containerFooter.appendChild(precipitationAmount);
         containerFooter.appendChild(cloudCover);
         containerFooter.appendChild(uvIndex);

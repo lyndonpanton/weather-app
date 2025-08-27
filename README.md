@@ -50,3 +50,5 @@ application.
 - [Weather icons | Visual Crossing](https://github.com/visualcrossing/WeatherIcons/tree/main/PNG/2nd%20Set%20-%20Color)
 
 ## References
+
+- [UV Index Scale | UV Index Today](https://www.uvindextoday.com/uv-index-scale)
