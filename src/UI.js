@@ -952,77 +952,7 @@ class UI {
 
         let icon = document.createElement("img");
         icon.classList.add("weather-current-icon");
-
-        switch (day.icon) {
-            case "clear-day":
-                icon.src = clearDayIcon;
-                break;
-            case "clear-night":
-                icon.src = clearNightIcon;
-                break;
-            case "cloudy":
-                icon.src = cloudyIcon;
-                break;
-            case "fog":
-                icon.src = fogIcon;
-                break;
-            case "hail":
-                icon.src = hailIcon;
-                break;
-            case "partly-cloudy-day":
-                icon.src = partlyCloudlyDayIcon;
-                break;
-            case "partly-cloudy-night":
-                icon.src = partlyCloudNightIcon;
-                break;
-            case "rain":
-                icon.src = rainIcon;
-                break;
-            case "rain-snow":
-                icon.src = rainSnowIcon;
-                break;
-            case "rain-snow-showers-day":
-                icon.src = rainSnowShowersDayIcon;
-                break;
-            case "rain-snow-showers-night":
-                icon.src = rainSnowShowersNightIcon;
-                break;
-            case "showers-day":
-                icon.src = showersDayIcon;
-                break;
-            case "showers-night":
-                icon.src = showersNightIcon;
-                break;
-            case "sleet":
-                icon.src = sleetIcon;
-                break;
-            case "snow":
-                icon.src = snowIcon;
-                break;
-            case "snow-showers-day":
-                icon.src = snowShowersDayIcon;
-                break;
-            case "snow-showers-night":
-                icon.src = snowShowersNightIcon;
-                break;
-            case "thunder":
-                icon.src = thunderIcon;
-                break;
-            case "thunder-rain":
-                icon.src = thunderRainIcon;
-                break;
-            case "thunder-showers-day":
-                icon.src = thunderShowersDayIcon;
-                break;
-            case "thunder-showers-night":
-                icon.src = thunderShowersNightIcon;
-                break;
-            case "wind":
-                icon.src = windIcon;
-                break;
-            default:
-                console.log("Error: Icon not found");
-        }
+        icon.src = this.getWeatherIcon(day.icon);
 
         let iconAltText = day.icon.split("-").join(" ");
         icon.alt = "A " + iconAltText + " weather icon";
@@ -1093,25 +1023,8 @@ class UI {
         // Denote compass wind direction in brackets (e.g., N, NE)
         let windDirection = document.createElement("p");
         windDirection.classList.add("weather-current-wind-direction");
-        let shorthandWindDirection;
-
-        if (day.winddir < 20 || day.winddir > 340) {
-            shorthandWindDirection = "N";
-        } else if (day.winddir >= 20 && day.winddir <= 70) {
-            shorthandWindDirection = "NE";
-        } else if (day.winddir > 70 && day.winddir < 110) {
-            shorthandWindDirection = "E";
-        } else if (day.winddir >= 110 && day.winddir <= 160) {
-            shorthandWindDirection = "SE";
-        } else if (day.winddir > 160 && day.winddir < 200) {
-            shorthandWindDirection = "S";
-        } else if (day.winddir >= 200 && day.winddir <= 250) {
-            shorthandWindDirection = "SW";
-        } else if (day.winddir > 250 && day.winddir < 290) {
-            shorthandWindDirection = "W";
-        } else {
-            shorthandWindDirection = "NW";
-        }
+        let shorthandWindDirection =
+            this.getWeatherShorthandWindDirection(day.winddir);
 
         windDirection.textContent =
             "Wind direction: " + day.winddir + "°"
@@ -1160,72 +1073,21 @@ class UI {
         uvIndex.textContent = "UV Index: " + day.uvindex;
         let uvIndexValue = document.createElement("span");
         uvIndexValue.classList.add("weather-current-uv-index-value");
-
-        switch (day.uvindex) {
-            case 0:
-            case 1:
-            case 2:
-                uvIndexValue.textContent += " (low)";
-                uvIndexValue.title = "No protection needed"
-                break;
-            case 3:
-            case 4:
-            case 5:
-                uvIndexValue.textContent += " (moderate)";
-                uvIndexValue.title = "Some protection needed"
-                break;
-            case 6:
-            case 7:
-                uvIndexValue.textContent += " (high)";
-                uvIndexValue.title = "Protection essential"
-                break;
-            case 8:
-            case 9:
-            case 10:
-                uvIndexValue.textContent += " (very high)";
-                uvIndexValue.title = "Extra protection is needed"
-                break;
-            default:
-                uvIndexValue.textContent += " (extreme)";
-                uvIndexValue.title = "Stay inside"
-                break;
-        }
+        uvIndexValue.textContent =
+            " (" + this.getWeatherUVIndexCategory(day.uvindex) + ")";
+        uvIndexValue.title = this.getWeatherUVIndexRecommendation(day.uvindex);
 
         uvIndex.appendChild(uvIndexValue);
 
-        let moonphase = document.createElement("p");
-        moonphase.classList.add("weather-current-moon-phase");
-        moonphase.textContent = "Moonphase: ";
-        let moonphaseValue = document.createElement("span");
-        moonphaseValue.classList.add("weather-current-moon-phase-value");
+        let moonPhase = document.createElement("p");
+        moonPhase.classList.add("weather-current-moon-phase");
+        moonPhase.textContent = "Moonphase: ";
+        let moonPhaseValue = document.createElement("span");
+        moonPhaseValue.classList.add("weather-current-moon-phase-value");
+        moonPhaseValue.textContent = this.getWeatherMoonPhaseString(day.moonphase);
+        moonPhaseValue.title = this.getWeatherMoonPhaseFraction(day.moonphase);
 
-        if (day.moonphase === 0) {
-            moonphaseValue.textContent += "New Moon";
-            moonphaseValue.title = "Phase 1 of 8";
-        } else if (day.moonphase <= 0.25) {
-            moonphaseValue.textContent += "Waxing Crescent";
-            moonphaseValue.title = "Phase 2 of 8";
-        } else if (day.moonphase === 0.25) {
-            moonphaseValue.textContent += "First Quarter";
-            moonphaseValue.title = "Phase 3 of 8";
-        } else if (day.moonphase <= 0.5) {
-            moonphaseValue.textContent += "Waxing Gibbous";
-            moonphaseValue.title = "Phase 4 of 8";
-        } else if (day.moonphase === 0.5) {
-            moonphaseValue.textContent += "Full Moon";
-            moonphaseValue.title = "Phase 5 of 8";
-        } else if (day.moonphase <= 0.75) {
-            moonphaseValue.textContent += "Waning Gibbous";
-            moonphaseValue.title = "Phase 6 of 8";
-        } else if (day.moonphase === 0.75) {
-            moonphaseValue.textContent += "Last Quarter";
-            moonphaseValue.title = "Phase 7 of 8";
-        } else {
-            moonphaseValue.textContent += "Waning Crecent";
-            moonphaseValue.title = "Phase 8 of 8";
-        }
-
-        moonphase.appendChild(moonphaseValue);
+        moonPhase.appendChild(moonPhaseValue);
 
         containerFooter.appendChild(windSpeed);
         containerFooter.appendChild(windDirection);
@@ -1237,7 +1099,7 @@ class UI {
         containerFooter.appendChild(precipitationAmount);
         containerFooter.appendChild(cloudCover);
         containerFooter.appendChild(uvIndex);
-        containerFooter.appendChild(moonphase);
+        containerFooter.appendChild(moonPhase);
 
         currentContainer.appendChild(containerFooter);
 
@@ -1248,14 +1110,17 @@ class UI {
         // clear previous current weather data
     
         // display current current weather data
-        for (let i = 1; i < data.days.length; i++) {
+        for (let i = 1; i < 8; i++) {
             /*
-                - Forecast (next 6 days)
+                - Forecast (next 6/7 days)
                     - Day
                     - Icon
                     - Temperature
                     - Conditions
             */
+           let day;
+
+           console.log();
         }
     }
 
@@ -1299,6 +1164,162 @@ class UI {
             )
 
             // return null;
+        }
+    }
+
+    getWeatherIcon(iconValue) {
+        switch (iconValue) {
+            case "clear-day":
+                return clearDayIcon;
+            case "clear-night":
+                return clearNightIcon;
+            case "cloudy":
+                return cloudyIcon;
+            case "fog":
+                return fogIcon;
+            case "hail":
+                return hailIcon;
+            case "partly-cloudy-day":
+                return partlyCloudlyDayIcon;
+            case "partly-cloudy-night":
+                return partlyCloudNightIcon;
+            case "rain":
+                return rainIcon;
+            case "rain-snow":
+                return rainSnowIcon;
+            case "rain-snow-showers-day":
+                return rainSnowShowersDayIcon;
+            case "rain-snow-showers-night":
+                return rainSnowShowersNightIcon;
+            case "showers-day":
+                return showersDayIcon;
+            case "showers-night":
+                return showersNightIcon;
+            case "sleet":
+                return sleetIcon;
+            case "snow":
+                return snowIcon;
+            case "snow-showers-day":
+                return snowShowersDayIcon;
+            case "snow-showers-night":
+                return snowShowersNightIcon;
+            case "thunder":
+                return thunderIcon;
+            case "thunder-rain":
+                return thunderRainIcon;
+            case "thunder-showers-day":
+                return thunderShowersDayIcon;
+            case "thunder-showers-night":
+                return thunderShowersNightIcon;
+            case "wind":
+                return windIcon;
+            default:
+                console.log("Error: Icon not found");
+                return null;
+        }
+    }
+
+    getWeatherMoonPhaseFraction(moonPhaseValue) {
+        if (moonPhaseValue === 0) {
+            return "Phase 1 of 8";
+        } else if (moonPhaseValue <= 0.25) {
+            return "Phase 2 of 8";
+        } else if (moonPhaseValue === 0.25) {
+            return "Phase 3 of 8";
+        } else if (moonPhaseValue <= 0.5) {
+            return "Phase 4 of 8";
+        } else if (moonPhaseValue === 0.5) {
+            return "Phase 5 of 8";
+        } else if (moonPhaseValue <= 0.75) {
+            return "Phase 6 of 8";
+        } else if (moonPhaseValue === 0.75) {
+            return "Phase 7 of 8";
+        } else {
+            return "Phase 8 of 8";
+        }
+    }
+
+    getWeatherMoonPhaseString(moonPhaseValue) {
+        if (moonPhaseValue === 0) {
+            return "New Moon";
+        } else if (moonPhaseValue <= 0.25) {
+            return "Waxing Crescent";
+        } else if (moonPhaseValue === 0.25) {
+            return "First Quarter";
+        } else if (moonPhaseValue <= 0.5) {
+            return "Waxing Gibbous";
+        } else if (moonPhaseValue === 0.5) {
+            return "Full Moon";
+        } else if (moonPhaseValue <= 0.75) {
+            return "Waning Gibbous";
+        } else if (moonPhaseValue === 0.75) {
+            return "Last Quarter";
+        } else {
+            return "Waning Crecent";
+        }
+    }
+
+    getWeatherShorthandWindDirection(angle) {
+        if (angle < 20 || angle > 340) {
+            return "N";
+        } else if (angle >= 20 && angle <= 70) {
+            return "NE";
+        } else if (angle > 70 && angle < 110) {
+            return "E";
+        } else if (angle >= 110 && angle <= 160) {
+            return "SE";
+        } else if (angle > 160 && angle < 200) {
+            return "S";
+        } else if (angle >= 200 && angle <= 250) {
+            return "SW";
+        } else if (angle > 250 && angle < 290) {
+            return "W";
+        } else {
+            return "NW";
+        }
+    }
+
+    getWeatherUVIndexCategory(uvIndex) {
+        switch (uvIndex) {
+            case 0:
+            case 1:
+            case 2:
+                return "low";
+            case 3:
+            case 4:
+            case 5:
+                return "moderate";
+            case 6:
+            case 7:
+                return "high";
+            case 8:
+            case 9:
+            case 10:
+                return "very high";
+            default:
+                return "extreme";
+        }
+    }
+
+    getWeatherUVIndexRecommendation(uvIndex) {
+        switch (uvIndex) {
+            case 0:
+            case 1:
+            case 2:
+                return "No protection needed";
+            case 3:
+            case 4:
+            case 5:
+                return "Some protection needed";
+            case 6:
+            case 7:
+                return "Protection essential";
+            case 8:
+            case 9:
+            case 10:
+                return "Extra protection is needed";
+            default:
+                return "Stay inside";
         }
     }
 
