@@ -789,6 +789,8 @@
             - updateDay
             - updateLocation
             - updateTemperatureType
+        - Content
+            - Add day to current and future weather data
         - Error handling
             - Invalid location entered
         - Styling
@@ -906,7 +908,6 @@ class UI {
                 - Date
         */
         let day = data.days[0];
-        console.log(day);
         
         const currentContainer = document.createElement("article");
         currentContainer.id = "weather-current";
@@ -1108,7 +1109,18 @@ class UI {
     
     displayWeatherDataFuture(data) {
         // clear previous current weather data
+        let previousFutureWeatherContainer =
+            document.getElementById("weather-future-container");
+        
+        if (previousFutureWeatherContainer) {
+            previousFutureWeatherContainer.parentElement.removeChild(
+                previousFutureWeatherContainer
+            );
+        }
     
+        let futureWeatherContainer = document.createElement("div");
+        futureWeatherContainer.id = "weather-future-container";
+
         // display current current weather data
         for (let i = 1; i < 8; i++) {
             /*
@@ -1118,10 +1130,42 @@ class UI {
                     - Temperature
                     - Conditions
             */
-           let day;
+            let futureWeatherElement = document.createElement("article");
+            futureWeatherElement.classList.add("weather-future-article");
 
-           console.log();
+            let day = data.days[i];
+            console.log(day);
+
+            let dayOfWeek = document.createElement("h4");
+            dayOfWeek.classList.add("weather-future-day");
+            // change to day of week
+            dayOfWeek.textContent = day.datetime.split("-").reverse().join("/");
+
+            let icon = document.createElement("img");
+            icon.classList.add("weather-future-icon");
+            icon.src = this.getWeatherIcon(day.icon);
+            let iconAltText = day.icon.split("-").join(" ");
+            icon.alt = "A " + iconAltText + " weather icon";
+
+            let temperature = document.createElement("p");
+            temperature.classList.add("weather-future-temperature");
+            temperature.textContent = this.temperatureType
+                ? day.temp + "°C"
+                : day.temp + "°F";
+
+            let conditions = document.createElement("p");
+            conditions.classList.add("weather-future-conditions");
+            conditions.textContent = day.conditions;
+
+            futureWeatherElement.appendChild(dayOfWeek);
+            futureWeatherElement.appendChild(icon);
+            futureWeatherElement.appendChild(temperature);
+            futureWeatherElement.appendChild(conditions);
+
+            futureWeatherContainer.appendChild(futureWeatherElement);
         }
+
+        this.main.appendChild(futureWeatherContainer);
     }
 
     async getWeatherData(e) {

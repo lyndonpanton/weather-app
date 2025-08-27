@@ -309,6 +309,32 @@ main {
     cursor: pointer;
 }
 
+/* future weather data footer row */
+#weather-future {
+
+}
+
+.weather-future-article {
+
+}
+
+.weather-future-day {
+
+}
+
+.weather-future-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.weather-future-temperature {
+
+}
+
+.weather-future-conditions {
+
+}
+
 /* Footer *********************************************************************/
 footer {
 
