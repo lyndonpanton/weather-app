@@ -196,7 +196,7 @@ main {
     text-align: center;
 }
 
-/* current weather data top row */
+/* current weather data header row */
 .weather-current-header {
 
 }
@@ -216,8 +216,61 @@ main {
     font-size: 1.2rem;
 }
 
-/* current weather data middle row */
+/* current weather data main row */
+.weather-current-main {
+    /* display: flex; */
+    justify-content: center;
+}
 
-/* current weather data bottom row */
+.weather-current-temperature {
+    font-size: 2.5rem;
+}
+
+.weather-current-celestial {
+    margin: 0 auto;
+    width: 200px;
+}
+
+.weather-current-icon {
+    display: block;
+    margin: 0 auto;
+    
+    width: 120px;
+    height: 120px;
+    border: 3px solid red;
+}
+
+.weather-current-sun-time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-current-sun {
+    margin: 6px 0 0 0;
+    padding: 0;
+
+    font-size: 1.3rem;
+    text-decoration: underline;
+}
+
+.weather-current-sunrise {
+
+}
+
+.weather-current-sunset {
+
+}
+
+.weather-current-conditions {
+    font-size: 2rem;
+}
+
+/* current weather data footer row */
+.weather-current-footer {
+
+}
 
 /* Footer *********************************************************************/
+footer {
+
+}

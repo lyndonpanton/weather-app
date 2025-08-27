@@ -792,7 +792,33 @@
     - Extensions
         - Use local storage to remember last location searched for, and load
         that data on page load (store: day, location, temperature type)
+        - Use a loading animation whilst the data is being gathered
+            - The weather image icon takes longer to display, so you may want
+            an individual loading icon for it as well
 */
+
+import clearDayIcon from "./icon/clear-day.png"
+import clearNightIcon from "./icon/clear-night.png"
+import cloudyIcon from "./icon/cloudy.png"
+import fogIcon from "./icon/fog.png"
+import hailIcon from "./icon/hail.png"
+import partlyCloudlyDayIcon from "./icon/partly-cloudy-day.png"
+import partlyCloudNightIcon from "./icon/partly-cloudy-night.png"
+import rainSnowShowersDayIcon from "./icon/rain-snow-showers-day.png"
+import rainShowShowersNightIcon from "./icon/rain-snow-showers-night.png"
+import rainSnowIcon from "./icon/rain-snow.png"
+import rainIcon from "./icon/rain.png"
+import showersDayIcon from "./icon/showers-day.png"
+import showersNightIcon from "./icon/showers-night.png"
+import sleetIcon from "./icon/sleet.png"
+import snowShowersDayIcon from "./icon/snow-showers-day.png"
+import snowShowersNightIcon from "./icon/snow-showers-night.png"
+import snowIcon from "./icon/snow.png"
+import thunderRainIcon from "./icon/thunder-rain.png"
+import thunderShowersDayIcon from "./icon/thunder-showers-day.png"
+import thunderShowersNightIcon from "./icon/thunder-showers-night.png"
+import thunderIcon from "./icon/thunder.png"
+import windIcon from "./icon/wind.png"
 
 class UI {
     constructor(weather) {
@@ -912,37 +938,62 @@ class UI {
 
         let temperature = document.createElement("p");
         temperature.classList.add("weather-current-temperature");
-        temperature.textContent = day.temp;
+        temperature.textContent = this.temperatureType
+            ? day.temp + "°C"
+            : day.temp + "°F";
+
+        let containerCelestial = document.createElement("div");
+        containerCelestial.classList.add("weather-current-celestial");
 
         let icon = document.createElement("img");
         icon.classList.add("weather-current-icon");
-        // depends on: day.icon
-        icon.src = "";
-        icon.alt = "";
+        // switch statement for each weather type
+        switch (day.icon) {
+            case "rain":
+                icon.src = rainIcon;
+                break;
+            default:
+                console.log("Error: Icon not found");
+        }
 
-        let sunrise = document.createElement("span");
+        let iconAltText = day.icon.split("-").join(" ");
+        icon.alt = "A " + iconAltText + " weather icon";
+
+        let containerSunTime = document.createElement("div");
+        containerSunTime.classList.add("weather-current-sun-time");
+
+        let sunrise = document.createElement("p");
         sunrise.classList.add(
-            "weather-current-suntime",
-            "weather-current-suntime-sunrise"
+            "weather-current-sun",
+            "weather-current-sunrise"
         );
         sunrise.textContent = day.sunrise.slice(
             0,
             day.sunrise.lastIndexOf(":")
         );
-        let sunset = document.createElement("span");
+        let sunset = document.createElement("p");
         sunset.classList.add(
-            "weather-current-suntime",
-            "weather-current-suntime-sunset"
+            "weather-current-sun",
+            "weather-current-sunset"
         );
         sunset.textContent = day.sunset.slice(
             0,
             day.sunset.lastIndexOf(":")
         );
 
+        containerSunTime.appendChild(sunrise);
+        containerSunTime.appendChild(sunset);
+
+        containerCelestial.appendChild(icon);
+        containerCelestial.appendChild(containerSunTime);
+
+        let conditions = document.createElement("p");
+        conditions.classList.add("weather-current-conditions");
+        conditions.textContent = day.conditions;
+
         containerMain.appendChild(temperature);
-        // containerMain.appendChild(icon);
-        containerMain.appendChild(sunrise);
-        containerMain.appendChild(sunset);
+        containerMain.appendChild(containerCelestial);
+        containerMain.appendChild(conditions);
 
         currentContainer.appendChild(containerMain);
 
@@ -971,7 +1022,7 @@ class UI {
 
         let windDirection = document.createElement("p");
         windDirection.classList.add("weather-current-wind-direction");
-        windDirection.textContent = day.winddir + " deg";
+        windDirection.textContent = day.winddir + "°";
 
         let humidity = document.createElement("p");
         humidity.classList.add("weather-current-humidity");
