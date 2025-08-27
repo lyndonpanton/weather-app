@@ -805,7 +805,7 @@ import hailIcon from "./icon/hail.png"
 import partlyCloudlyDayIcon from "./icon/partly-cloudy-day.png"
 import partlyCloudNightIcon from "./icon/partly-cloudy-night.png"
 import rainSnowShowersDayIcon from "./icon/rain-snow-showers-day.png"
-import rainShowShowersNightIcon from "./icon/rain-snow-showers-night.png"
+import rainSnowShowersNightIcon from "./icon/rain-snow-showers-night.png"
 import rainSnowIcon from "./icon/rain-snow.png"
 import rainIcon from "./icon/rain.png"
 import showersDayIcon from "./icon/showers-day.png"
@@ -947,10 +947,52 @@ class UI {
 
         let icon = document.createElement("img");
         icon.classList.add("weather-current-icon");
-        // switch statement for each weather type
+        
         switch (day.icon) {
+            case "clear-day":
+                icon.src = clearDayIcon;
+            case "clear-night":
+                icon.src = clearNightIcon;
+            case "cloudy":
+                icon.src = cloudyIcon;
+            case "fog":
+                icon.src = fogIcon;
+            case "hail":
+                icon.src = hailIcon;
+            case "partly-cloudy-day":
+                icon.src = partlyCloudlyDayIcon;
+            case "partly-cloudy-night":
+                icon.src = partlyCloudNightIcon;
             case "rain":
                 icon.src = rainIcon;
+            case "rain-snow":
+                icon.src = rainSnowIcon;
+            case "rain-snow-showers-day":
+                icon.src = rainSnowShowersDayIcon;
+            case "rain-snow-showers-night":
+                icon.src = rainSnowShowersNightIcon;
+            case "showers-day":
+                icon.src = showersDayIcon;
+            case "showers-night":
+                icon.src = showersNightIcon;
+            case "sleet":
+                icon.src = sleetIcon;
+            case "snow":
+                icon.src = snowIcon;
+            case "snow-showers-day":
+                icon.src = snowShowersDayIcon;
+            case "snow-showers-night":
+                icon.src = snowShowersNightIcon;
+            case "thunder":
+                icon.src = thunderIcon;
+            case "thunder-rain":
+                icon.src = thunderRainIcon;
+            case "thunder-showers-day":
+                icon.src = thunderShowersDayIcon;
+            case "thunder-showers-night":
+                icon.src = thunderShowersNightIcon;
+            case "wind":
+                icon.src = windIcon;
                 break;
             default:
                 console.log("Error: Icon not found");
