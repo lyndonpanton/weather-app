@@ -1017,9 +1017,10 @@ class UI {
 
         let windSpeed = document.createElement("p");
         windSpeed.classList.add("weather-current-wind-speed");
-        windSpeed.textContent = this.temperatureType
-            ? "Wind speed: " + day.windspeed + "mph"
-            : "Wind speed: " + day.windspeed + "km/h";
+        // windSpeed.textContent = this.temperatureType
+        //     ? "Wind speed: " + day.windspeed + "mph"
+        //     : "Wind speed: " + day.windspeed + "km/h";
+        windSpeed.textContent = "Wind speed: " + day.windspeed + "mph";
 
         // Denote compass wind direction in brackets (e.g., N, NE)
         let windDirection = document.createElement("p");
@@ -1063,9 +1064,10 @@ class UI {
 
         let visibility = document.createElement("p");
         visibility.classList.add("weather-current-visibility");
-        visibility.textContent = this.temperatureType
-            ? "Visibility: " + day.visibility + "km"
-            : "Visibility: " + day.visibility + " miles";
+        // visibility.textContent = this.temperatureType
+        //     ? "Visibility: " + day.visibility + "km"
+        //     : "Visibility: " + day.visibility + " miles";
+        visibility.textContent = "Visibility: " + day.visibility + " miles";
 
         // add dotted underline styling and supply a tooltip with protection
         // recommendation depending on the UV index
