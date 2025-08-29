@@ -859,14 +859,11 @@ class UI {
     }
 
     displayWeatherDataCurrent(data) {
-        // clear previous current weather data
         const previousContainer = document.getElementById("weather-current");
         
         if (previousContainer) {
             previousContainer.parentElement.removeChild(previousContainer);
         }
-
-        // display current current weather data
 
         /*
             - Top
@@ -988,7 +985,6 @@ class UI {
         //     : "Wind speed: " + day.windspeed + "km/h";
         windSpeed.textContent = "Wind speed: " + day.windspeed + "mph";
 
-        // Denote compass wind direction in brackets (e.g., N, NE)
         let windDirection = document.createElement("p");
         windDirection.classList.add("weather-current-wind-direction");
         let shorthandWindDirection =
@@ -1022,11 +1018,6 @@ class UI {
         precipitationAmount.textContent = this.temperatureType
             ? "Precipitation coverage: " + day.precip + "mm"
             : "Precipitation coverage: " + day.precip + "in";
-
-        // add text-based message in brackets
-        // let severeRisk = document.createElement("p");
-        // severeRisk.classList.add("weather-current-severe-risk");
-        // severeRisk.textContent = "Severe risk: " + day.severerisk;
 
         let visibility = document.createElement("p");
         visibility.classList.add("weather-current-visibility");
@@ -1062,8 +1053,6 @@ class UI {
         containerFooter.appendChild(windSpeed);
         containerFooter.appendChild(windDirection);
         containerFooter.appendChild(humidity);
-        // containerFooter.appendChild(snow);
-        // containerFooter.appendChild(severeRisk);
         containerFooter.appendChild(cloudCoverage);
         containerFooter.appendChild(precipitationType);
         containerFooter.appendChild(precipitationAmount);
@@ -1077,7 +1066,6 @@ class UI {
     }
     
     displayWeatherDataFuture(data) {
-        // clear previous current weather data
         let previousFutureWeatherContainer =
             document.getElementById("weather-future-container");
         
@@ -1090,7 +1078,6 @@ class UI {
         let futureWeatherContainer = document.createElement("div");
         futureWeatherContainer.id = "weather-future-container";
 
-        // display current current weather data
         for (let i = 1; i < 8; i++) {
             /*
                 - Forecast (next 6/7 days)
@@ -1107,7 +1094,7 @@ class UI {
 
             let dayOfWeek = document.createElement("h4");
             dayOfWeek.classList.add("weather-future-day");
-            // change to day of week
+            // add day of week
             dayOfWeek.textContent = day.datetime.split("-").reverse().join("/");
 
             let icon = document.createElement("img");
@@ -1293,46 +1280,34 @@ class UI {
     }
 
     getWeatherUVIndexCategory(uvIndex) {
-        switch (uvIndex) {
-            case 0:
-            case 1:
-            case 2:
-                return "low";
-            case 3:
-            case 4:
-            case 5:
-                return "moderate";
-            case 6:
-            case 7:
-                return "high";
-            case 8:
-            case 9:
-            case 10:
-                return "very high";
-            default:
-                return "extreme";
+        if (uvIndex < 0) {
+            return "n/a"
+        } else if (uvIndex <= 2) {
+            return "low";
+        } else if (uvIndex <= 5) {
+            return "moderate";
+        } else if (uvIndex <= 7) {
+            return "high";
+        } else if (uvIndex <= 10) {
+            return "very high";
+        } else {
+            return "extreme";
         }
     }
 
     getWeatherUVIndexRecommendation(uvIndex) {
-        switch (uvIndex) {
-            case 0:
-            case 1:
-            case 2:
-                return "No protection needed";
-            case 3:
-            case 4:
-            case 5:
-                return "Some protection needed";
-            case 6:
-            case 7:
-                return "Protection essential";
-            case 8:
-            case 9:
-            case 10:
-                return "Extra protection is needed";
-            default:
-                return "Stay inside";
+        if (uvIndex < 0) {
+            return "n/a"
+        } else if (uvIndex <= 2) {
+            return "No protection needed";
+        } else if (uvIndex <= 5) {
+            return "Some protection needed";
+        } else if (uvIndex <= 7) {
+            return "Protection essential";
+        } else if (uvIndex <= 10) {
+            return "Extra protection is needed";
+        } else {
+            return "Stay inside";
         }
     }
 
