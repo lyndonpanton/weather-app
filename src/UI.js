@@ -1041,6 +1041,21 @@ class UI {
             ? "Snow coverage: " + day.snow + "cm"
             : "Snow coverage: " + day.snow + "in";
 
+        let cloudCoverage = document.createElement("p");
+        cloudCoverage.classList.add("weather-current-cloud-cover");
+        cloudCoverage.textContent = "Cloud coverage: " + day.cloudcover + "%";
+
+        let precipitationType = document.createElement("p");
+        precipitationType.classList.add("weather-current-precipitation-type");
+        precipitationType.textContent = "Precipitation type: "
+            + day.preciptype[0][0].toUpperCase() + day.preciptype[0].slice(1);
+
+        let precipitationAmount = document.createElement("p");
+        precipitationAmount.classList.add("weather-current-precipitationAmount");
+        precipitationAmount.textContent = this.temperatureType
+            ? "Precipitation coverage: " + day.precip + "mm"
+            : "Precipitation coverage: " + day.precip + "in";
+
         // add text-based message in brackets
         // let severeRisk = document.createElement("p");
         // severeRisk.classList.add("weather-current-severe-risk");
@@ -1051,20 +1066,6 @@ class UI {
         visibility.textContent = this.temperatureType
             ? "Visibility: " + day.visibility + "km"
             : "Visibility: " + day.visibility + " miles";
-
-        // let precipitationType = document.createElement("p");
-        // precipitationType.classList.add("weather-current-precipitation-type");
-        // precipitationType.textContent = day.preciptype;
-
-        let precipitationAmount = document.createElement("p");
-        precipitationAmount.classList.add("weather-current-precipitationAmount");
-        precipitationAmount.textContent = this.temperatureType
-            ? "Precipitation coverage: " + day.precip + "mm"
-            : "Precipitation coverage: " + day.precip + "in";
-
-        let cloudCover = document.createElement("p");
-        cloudCover.classList.add("weather-current-cloud-cover");
-        cloudCover.textContent = "Cloud coverage: " + day.cloudcover + "%";
 
         // add dotted underline styling and supply a tooltip with protection
         // recommendation depending on the UV index
@@ -1093,12 +1094,12 @@ class UI {
         containerFooter.appendChild(windSpeed);
         containerFooter.appendChild(windDirection);
         containerFooter.appendChild(humidity);
-        containerFooter.appendChild(snow);
+        // containerFooter.appendChild(snow);
         // containerFooter.appendChild(severeRisk);
-        containerFooter.appendChild(visibility);
-        // containerFooter.appendChild(precipitationType);
+        containerFooter.appendChild(cloudCoverage);
+        containerFooter.appendChild(precipitationType);
         containerFooter.appendChild(precipitationAmount);
-        containerFooter.appendChild(cloudCover);
+        containerFooter.appendChild(visibility);
         containerFooter.appendChild(uvIndex);
         containerFooter.appendChild(moonPhase);
 
