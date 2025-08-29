@@ -769,40 +769,6 @@
 
 // export default UI;
 
-/*
-    - MVP
-        - Weather form should be displayed on page load
-        - Request
-            - Use an async function to retrieve the weather data object when
-            request is made
-            - If day is -1 (display current data):
-                - Remove left, center, and right content
-                - Populate left, center, and right content
-            - If day is not -1 (display future data):
-                - Remove left, center, and right content
-                - Populate left, center, and right content
-        - State
-            - day: int
-            - location: string
-            - temperatureType: bool
-        - State modifiers
-            - updateDay
-            - updateLocation
-            - updateTemperatureType
-        - Content
-            - Add day to current and future weather data
-        - Error handling
-            - Invalid location entered
-        - Styling
-            - Underline values for extra weather data
-    - Extensions
-        - Use local storage to remember last location searched for, and load
-        that data on page load (store: day, location, temperature type)
-        - Use a loading animation whilst the data is being gathered
-            - The weather image icon takes longer to display, so you may want
-            an individual loading icon for it as well
-*/
-
 import clearDayIcon from "./icon/clear-day.svg"
 import clearNightIcon from "./icon/clear-night.svg"
 import cloudyIcon from "./icon/cloudy.svg"
