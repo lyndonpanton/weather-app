@@ -883,9 +883,10 @@ class UI {
         location.textContent =
             this.location[0].toUpperCase() + this.location.slice(1);
 
+        // Wednesday, 3rd September 2025
         let date = document.createElement("p");
         date.classList.add("weather-current-date");
-        date.textContent = day.datetime.split("-").reverse().join("/");
+        date.textContent = this.getWeatherDate(day.datetime);
 
         containerHeader.appendChild(location);
         containerHeader.appendChild(date);
@@ -1010,8 +1011,12 @@ class UI {
 
         let precipitationType = document.createElement("p");
         precipitationType.classList.add("weather-current-precipitation-type");
-        precipitationType.textContent = "Precipitation type: "
-            + day.preciptype[0][0].toUpperCase() + day.preciptype[0].slice(1);
+        if (day.preciptype !== null) {
+            precipitationType.textContent = "Precipitation type: "
+                + day.preciptype[0][0].toUpperCase() + day.preciptype[0].slice(1);
+        } else {
+            precipitationType.textContent = "Precipitation type: n/a";
+        }
 
         let precipitationAmount = document.createElement("p");
         precipitationAmount.classList.add("weather-current-precipitationAmount");
@@ -1054,7 +1059,7 @@ class UI {
         containerFooter.appendChild(windDirection);
         containerFooter.appendChild(humidity);
         containerFooter.appendChild(cloudCoverage);
-        containerFooter.appendChild(precipitationType);
+        containerFooter.appendChild(precipitationType);    
         containerFooter.appendChild(precipitationAmount);
         containerFooter.appendChild(visibility);
         containerFooter.appendChild(uvIndex);
@@ -1090,12 +1095,11 @@ class UI {
             futureWeatherElement.classList.add("weather-future-article");
 
             let day = data.days[i];
-            console.log(day);
 
             let dayOfWeek = document.createElement("h4");
             dayOfWeek.classList.add("weather-future-day");
-            // add day of week
-            dayOfWeek.textContent = day.datetime.split("-").reverse().join("/");
+            dayOfWeek.textContent = this.getWeatherDate(day.datetime)
+                    .slice(0, this.getWeatherDate(day.datetime).indexOf(","));
 
             let icon = document.createElement("img");
             icon.classList.add("weather-future-icon");
@@ -1165,6 +1169,95 @@ class UI {
 
             // return null;
         }
+    }
+
+    getWeatherDate(datetime) {
+        let dayOfWeek = new Date(datetime).getDay();
+
+        switch (dayOfWeek) {
+            case 0:
+                dayOfWeek = "Sunday";
+                break;
+            case 1:
+                dayOfWeek = "Monday";
+                break;
+            case 2:
+                dayOfWeek = "Tuesday";
+                break;
+            case 3:
+                dayOfWeek = "Wednesday";
+                break;
+            case 4:
+                dayOfWeek = "Thursday";
+                break;
+            case 5:
+                dayOfWeek = "Friday";
+                break;
+            case 6:
+                dayOfWeek = "Saturday";
+                break;
+        }
+
+        let dayOfMonth = new Date(datetime).getDate().toString();
+
+        if (dayOfMonth.length === 1) {
+            dayOfMonth = dayOfMonth.at(-1);
+        }
+
+        if (dayOfMonth.at(-1) === "1") {
+            dayOfMonth += "st";
+        } else if (dayOfMonth.at(-1) === "2") {
+            dayOfMonth += "nd";
+        } else if (dayOfMonth.at(-1) === "3") {
+            dayOfMonth += "rd";
+        } else {
+            dayOfMonth += "th";
+        }
+
+        let month = new Date(datetime).getMonth();
+
+        switch (month) {
+            case 0:
+                month = "January";
+                break;
+            case 1:
+                month = "Febrary";
+                break;
+            case 2:
+                month = "March";
+                break;
+            case 3:
+                month = "April";
+                break;
+            case 4:
+                month = "May";
+                break;
+            case 5:
+                month = "June";
+                break;
+            case 6:
+                month = "July";
+                break;
+            case 7:
+                month = "August";
+                break;
+            case 8:
+                month = "September";
+                break;
+            case 9:
+                month = "October";
+                break;
+            case 10:
+                month = "November";
+                break;
+            case 11:
+                month = "December";
+                break;
+        }
+
+        let year = new Date(datetime).getFullYear();
+        
+        return dayOfWeek + ", " + dayOfMonth + " " + month + " " + year;
     }
 
     getWeatherIcon(iconValue) {
