@@ -310,29 +310,46 @@ main {
 }
 
 /* future weather data footer row */
-#weather-future {
+#weather-future-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
 
+    margin: 40px auto;
+    width: 80%;
 }
 
 .weather-future-article {
+    border: 1px solid darkblue;
+    border-radius: 4px;
+    width: 180px;
+    height: 180px;
 
+    background-color: white;
+    background-color: aliceblue;
+    background: rgba(240, 240, 240, 0.3);
 }
 
 .weather-future-day {
-
+    /* margin: 0; */
+    text-align: center;
 }
 
 .weather-future-icon {
+    display: block;
+
+    margin: 0 auto;
     width: 40px;
     height: 40px;
 }
 
 .weather-future-temperature {
-
+    text-align: center;
 }
 
 .weather-future-conditions {
-
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 /* Footer *********************************************************************/

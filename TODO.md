@@ -20,12 +20,24 @@ A list of tasks I need to do to complete the weather-app project.
 
 - [x] Wind speed should use mph as its unit
 - [x] Visibility should used miles as its unit
-- [ ] Display day of week with date for current weather data
+- [x] Display day of week for current weather data
+- [ ] Add sections to footer
+    - [ ] Project
+        - [ ] Developer Information
+        - [ ] Languages and Frameworks
+        - [ ] Managers, Packages, and Libraries
+        - [ ] More projects
+    - [ ] Data
+        - [ ] Legal
+        - [ ] Social
+    - [x] Copyright
 
 ### Styling
 
 - [ ] Future weather data should be positioned appropriately
-- [ ] Only underline the text message for uv index
+- [ ] Only underline the text message for uv index (not number)
+- [ ] Position footer elements
+- [ ] Styling footer elements
 
 ### Functionality
 
