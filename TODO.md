@@ -22,11 +22,11 @@ A list of tasks I need to do to complete the weather-app project.
 - [x] Visibility should used miles as its unit
 - [x] Display day of week for current weather data
 - [ ] Add sections to footer
-    - [ ] Project
-        - [ ] Developer Information
-        - [ ] Languages and Frameworks
-        - [ ] Managers, Packages, and Libraries
-        - [ ] More projects
+    - [x] Project Profile
+        - [x] Developer Information
+        - [x] Languages and Frameworks
+        - [x] Managers, Packages, and APIs
+        - [x] More projects
     - [ ] Data
         - [ ] Legal
         - [ ] Social
@@ -34,7 +34,9 @@ A list of tasks I need to do to complete the weather-app project.
 
 ### Styling
 
-- [ ] Future weather data should be positioned appropriately
+- [x] Future weather data
+    - [x] Position appropriately
+    - [x] Style appropriately
 - [ ] Only underline the text message for uv index (not number)
 - [ ] Position footer elements
 - [ ] Styling footer elements
@@ -42,6 +44,13 @@ A list of tasks I need to do to complete the weather-app project.
 ### Functionality
 
 ### Asset
+
+- [ ] Add favicon icon
+
+### Deployment
+
+- [ ] Bundle project
+- [ ] Add project to portfolio website
 
 ### Maintenance
 

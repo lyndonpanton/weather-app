@@ -802,6 +802,183 @@ class UI {
         this.temperatureType = true;
 
         this.displayUI();
+        this.displayFooter();
+    }
+
+    displayFooter() {
+        const footer = document.getElementsByTagName("footer")[0];
+        this.displayFooterProfile(footer);
+    }
+
+    displayFooterCopyright(container) {
+        const copyright = document.createElement("p");
+    }
+
+    displayFooterData(container) {
+
+    }
+
+    displayFooterProfile(container) {
+        const profile = document.createElement("div");
+
+        this.displayFooterProfileDeveloperInformation(profile);
+        this.displayFooterProfileLangaugesFrameworks(profile);
+        this.displayFooterProfileManagersPackages(profile);
+        this.displayFooterProfileMoreProjects(profile);
+
+        container.appendChild(profile);
+    }
+
+    displayFooterProfileDeveloperInformation(container) {
+        const developerInformation = document.createElement("ul");
+
+        let developerInformationHeading = document.createElement("li");
+        developerInformationHeading.textContent = "Developer Information";
+
+        let portfolio = document.createElement("li");
+        let portfolioLink = document.createElement("a");
+        portfolioLink.href = "https://lyndonpanton.co.uk";
+        portfolioLink.target = "_blank";
+        portfolioLink.textContent = "Portfolio";
+        portfolio.appendChild(portfolioLink);
+
+        let github = document.createElement("li");
+        let githubLink = document.createElement("a");
+        githubLink.href = "https://github.com/lyndonpanton";
+        githubLink.target = "_blank";
+        githubLink.textContent = "GitHub";
+        github.appendChild(githubLink);
+
+        let linkedin = document.createElement("li");
+        let linkedinLink = document.createElement("a");
+        linkedinLink.href = "https://linkedin.com/in/lyndonpanton";
+        linkedinLink.target = "_blank";
+        linkedinLink.textContent = "LinkedIn";
+        linkedin.appendChild(linkedinLink);
+
+        developerInformation.appendChild(developerInformationHeading);
+        developerInformation.appendChild(portfolio);
+        developerInformation.appendChild(github);
+        developerInformation.appendChild(linkedin);
+
+        container.appendChild(developerInformation);
+    }
+    
+    displayFooterProfileLangaugesFrameworks(container) {
+        const languagesFrameworks = document.createElement("ul");
+
+        let languagesFrameworksHeading = document.createElement("li");
+        languagesFrameworksHeading.textContent = "Languages and Frameworks";
+
+        let html = document.createElement("li");
+        let htmlLink = document.createElement("a");
+        htmlLink.href = "https://developer.mozilla.org/en-US/docs/Web/HTML";
+        htmlLink.target = "_blank";
+        htmlLink.textContent = "HTML";
+        html.appendChild(htmlLink);
+
+        let css = document.createElement("li");
+        let cssLink = document.createElement("a");
+        cssLink.href = "https://developer.mozilla.org/en-US/docs/Web/CSS";
+        cssLink.target = "_blank";
+        cssLink.textContent = "CSS";
+        css.appendChild(cssLink);
+
+        let javaScript = document.createElement("li");
+        let javaScriptLink = document.createElement("a");
+        javaScriptLink.href = "https://developer.mozilla.org/en-US/docs/Web/JavaScript";
+        javaScriptLink.target = "_blank";
+        javaScriptLink.textContent = "JavaScript";
+        javaScript.appendChild(javaScriptLink);
+
+        languagesFrameworks.appendChild(languagesFrameworksHeading);
+        languagesFrameworks.appendChild(html);
+        languagesFrameworks.appendChild(css);
+        languagesFrameworks.appendChild(javaScript);
+
+        container.appendChild(languagesFrameworks);
+    }
+    
+    displayFooterProfileManagersPackages(container) {
+        const managersPackagesApis = document.createElement("ul");
+
+        let managersPackagesApisHeading = document.createElement("li");
+        managersPackagesApisHeading.textContent = "Managers, Packages, and APIs";
+
+        let npm = document.createElement("li");
+        let npmLink = document.createElement("a");
+        npmLink.href = "https://www.npmjs.com/";
+        npmLink.target = "_blank";
+        npmLink.textContent = "npm";
+        npm.appendChild(npmLink);
+
+        let webpack = document.createElement("li");
+        let webpackLink = document.createElement("a");
+        webpackLink.href = "https://webpack.js.org/";
+        webpackLink.target = "_blank";
+        webpackLink.textContent = "Webpack";
+        webpack.appendChild(webpackLink);
+
+        let visualCrossing = document.createElement("li");
+        let visualCrossingLink = document.createElement("a");
+        visualCrossingLink.href = "https://www.visualcrossing.com/";
+        visualCrossingLink.target = "_blank";
+        visualCrossingLink.textContent = "Visual Crossing";
+        visualCrossing.appendChild(visualCrossingLink);
+
+        managersPackagesApis.appendChild(managersPackagesApisHeading);
+        managersPackagesApis.appendChild(npm);
+        managersPackagesApis.appendChild(webpack);
+        managersPackagesApis.appendChild(visualCrossing);
+
+        container.appendChild(managersPackagesApis);
+    }
+    
+    displayFooterProfileMoreProjects(container) {
+        const moreProjects = document.createElement("ul");
+
+        let moreProjectsHeading = document.createElement("li");
+        moreProjectsHeading.textContent = "More Projects";
+
+        let pixelArtEditor = document.createElement("li");
+        let pixelArtEditorLink = document.createElement("a");
+        pixelArtEditorLink.href =
+                "https://github.com/lyndonpanton/pixel-art-editor";
+        pixelArtEditorLink.target = "_blank";
+        pixelArtEditorLink.textContent = "Pixel Art Editor";
+        pixelArtEditor.appendChild(pixelArtEditorLink);
+
+        let currencyConvertor = document.createElement("li");
+        let currencyConvertorLink = document.createElement("a");
+        currencyConvertorLink.href =
+                "https://github.com/lyndonpanton/currency-converter";
+        currencyConvertorLink.target = "_blank";
+        currencyConvertorLink.textContent = "Currency Convertor";
+        currencyConvertor.appendChild(currencyConvertorLink);
+
+        let wordCounter = document.createElement("li");
+        let wordCounterLink = document.createElement("a");
+        wordCounterLink.href =
+                "https://github.com/lyndonpanton/word-counter";
+        wordCounterLink.target = "_blank";
+        wordCounterLink.textContent = "Word Counter";
+        wordCounter.appendChild(wordCounterLink);
+
+        let taskList = document.createElement("li");
+        let taskListLink = document.createElement("a");
+        taskListLink.href =
+                "https://github.com/lyndonpanton/task-list";
+        taskListLink.target = "_blank";
+        taskListLink.textContent = "Pixel Art Editor";
+        taskList.appendChild(taskListLink);
+
+        moreProjects.appendChild(moreProjectsHeading);
+        moreProjects.appendChild(pixelArtEditor);
+        moreProjects.appendChild(currencyConvertor);
+        moreProjects.appendChild(wordCounter);
+        moreProjects.appendChild(taskList);
+
+        container.appendChild(moreProjects);
     }
 
     displayUI() {
