@@ -1156,7 +1156,7 @@ class UI {
         taskListLink.href =
                 "https://github.com/lyndonpanton/task-list";
         taskListLink.target = "_blank";
-        taskListLink.textContent = "Pixel Art Editor";
+        taskListLink.textContent = "Task List";
         taskList.appendChild(taskListLink);
 
         moreProjects.appendChild(moreProjectsHeading);
