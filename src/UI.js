@@ -807,7 +807,9 @@ class UI {
 
     displayFooter() {
         const footer = document.getElementsByTagName("footer")[0];
+
         this.displayFooterProfile(footer);
+        this.displayFooterData(footer);
     }
 
     displayFooterCopyright(container) {
@@ -815,7 +817,50 @@ class UI {
     }
 
     displayFooterData(container) {
+        const data = document.createElement("div");
 
+        this.displayFooterDataLegal(data);
+        this.displayFooterDataSocial(data);
+
+        container.appendChild(data);
+    }
+
+    displayFooterDataLegal(container) {
+        const legal = document.createElement("ul");
+
+        let privacyPolicy = document.createElement("li");
+        privacyPolicy.textContent = "Privacy Policy";
+
+        let termsAndConditions = document.createElement("li");
+        termsAndConditions.textContent = "Terms and Conditions";
+
+        let cookies = document.createElement("li");
+        cookies.textContent = "Cookies";
+
+        legal.appendChild(privacyPolicy);
+        legal.appendChild(termsAndConditions);
+        legal.appendChild(cookies);
+
+        container.appendChild(legal);
+    }
+    
+    displayFooterDataSocial(container) {
+        const social = document.createElement("ul");
+    
+        let twitter = document.createElement("li");
+        twitter.textContent = "Twitter";
+    
+        let facebook = document.createElement("li");
+        facebook.textContent = "Facebook";
+    
+        let instagram = document.createElement("li");
+        instagram.textContent = "Instagram";
+    
+        social.appendChild(twitter);
+        social.appendChild(facebook);
+        social.appendChild(instagram);
+    
+        container.appendChild(social);
     }
 
     displayFooterProfile(container) {

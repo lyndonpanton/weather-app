@@ -46,6 +46,7 @@ A list of tasks I need to do to complete the weather-app project.
 ### Asset
 
 - [ ] Add favicon icon
+- [ ] Use icons for social media sites in footer
 
 ### Deployment
 
