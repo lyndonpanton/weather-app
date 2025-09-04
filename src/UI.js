@@ -806,7 +806,7 @@ class UI {
     }
 
     displayFooter() {
-        const footer = document.createElement("footer");
+        const footer = document.getElementsByTagName("footer")[0];
 
         this.displayFooterProfile(footer);
         this.displayFooterData(footer);
@@ -817,20 +817,41 @@ class UI {
 
     displayFooterCopyright(container) {
         const copyright = document.createElement("p");
+        copyright.classList.add("footer-copyright");
 
         let copyRightSymbol = document.createElement("span");
+        copyRightSymbol.classList.add(
+            "footer-copyright-element",
+            "footer-copyright-symbol"
+        );
         copyRightSymbol.innerHTML = "&copy; ";
 
         let copyrightYear = document.createElement("span");
+        copyrightYear.classList.add(
+            "footer-copyright-element",
+            "footer-copyright-year"
+        );
         copyrightYear.textContent = new Date().getFullYear() + " ";
 
         let copyrightHolder = document.createElement("span");
+        copyrightHolder.classList.add(
+            "footer-copyright-element",
+            "footer-copyright-holder"
+        );
         copyrightHolder.textContent = "Lyndon Mykal Panton ";
 
         let copyRightDivider = document.createElement("span");
+        copyRightDivider.classList.add(
+            "footer-copyright-element",
+            "footer-copyright-divider"
+        );
         copyRightDivider.textContent = "| ";
 
         let copyrightLicense = document.createElement("span");
+        copyrightLicense.classList.add(
+            "footer-copyright-element",
+            "footer-copyright-license"
+        );
         copyrightLicense.textContent = "All Rights Reserved";
 
         copyright.appendChild(copyRightSymbol);
@@ -844,6 +865,7 @@ class UI {
 
     displayFooterData(container) {
         const data = document.createElement("div");
+        data.classList.add("footer-data");
 
         this.displayFooterDataLegal(data);
         this.displayFooterDataSocial(data);
@@ -853,14 +875,30 @@ class UI {
 
     displayFooterDataLegal(container) {
         const legal = document.createElement("ul");
+        legal.classList.add(
+            "footer-data-list",
+            "footer-data-legal"
+        );
 
         let privacyPolicy = document.createElement("li");
+        privacyPolicy.classList.add(
+            "footer-data-list-item",
+            "footer-data-list-pp"
+        );
         privacyPolicy.textContent = "Privacy Policy";
 
         let termsAndConditions = document.createElement("li");
+        termsAndConditions.classList.add(
+            "footer-data-list-item",
+            "footer-data-list-tac"
+        );
         termsAndConditions.textContent = "Terms and Conditions";
 
         let cookies = document.createElement("li");
+        cookies.classList.add(
+            "footer-data-list-item",
+            "footer-data-list-cookies"
+        );
         cookies.textContent = "Cookies";
 
         legal.appendChild(privacyPolicy);
@@ -872,15 +910,46 @@ class UI {
     
     displayFooterDataSocial(container) {
         const social = document.createElement("ul");
+        social.classList.add(
+            "footer-data-list",
+            "footer-data-social"
+        );
     
         let twitter = document.createElement("li");
-        twitter.textContent = "Twitter";
+        twitter.classList.add(
+            "footer-data-list-item",
+            "footer-data-list-twitter"
+        );
+        let twitterLink = document.createElement("a");
+        twitterLink.classList.add("footer-data-list-link");
+        twitterLink.href = "https://twitter.com";
+        twitterLink.target = "_blank";
+        twitterLink.textContent = "Twitter";
+        twitter.appendChild(twitterLink);
     
         let facebook = document.createElement("li");
-        facebook.textContent = "Facebook";
+        facebook.classList.add(
+            "footer-data-list-item",
+            "footer-data-list-facebook"
+        );
+        let facebookLink = document.createElement("a");
+        facebookLink.classList.add("footer-data-list-link");
+        facebookLink.href = "https://facebook.com";
+        facebookLink.target = "_blank";
+        facebookLink.textContent = "Facebook";
+        facebook.appendChild(facebookLink);
     
         let instagram = document.createElement("li");
-        instagram.textContent = "Instagram";
+        instagram.classList.add(
+            "footer-data-list-item",
+            "footer-data-list-instagram"
+        );
+        let instagramLink = document.createElement("a");
+        instagramLink.classList.add("footer-data-list-link");
+        instagramLink.href = "https://instagram.com";
+        instagramLink.target = "_blank";
+        instagramLink.textContent = "Instagram";
+        instagram.appendChild(instagramLink);
     
         social.appendChild(twitter);
         social.appendChild(facebook);
@@ -891,6 +960,7 @@ class UI {
 
     displayFooterProfile(container) {
         const profile = document.createElement("div");
+        profile.classList.add("footer-profile");
 
         this.displayFooterProfileDeveloperInformation(profile);
         this.displayFooterProfileLangaugesFrameworks(profile);
@@ -902,26 +972,37 @@ class UI {
 
     displayFooterProfileDeveloperInformation(container) {
         const developerInformation = document.createElement("ul");
+        developerInformation.classList.add(
+            "footer-profile-list",
+            "footer-profile-developer"
+        );
 
         let developerInformationHeading = document.createElement("li");
+        developerInformationHeading.classList.add("footer-profile-list-heading");
         developerInformationHeading.textContent = "Developer Information";
 
         let portfolio = document.createElement("li");
+        portfolio.classList.add("footer-profile-list-item");
         let portfolioLink = document.createElement("a");
+        portfolioLink.classList.add("footer-profile-list-link");
         portfolioLink.href = "https://lyndonpanton.co.uk";
         portfolioLink.target = "_blank";
         portfolioLink.textContent = "Portfolio";
         portfolio.appendChild(portfolioLink);
 
         let github = document.createElement("li");
+        github.classList.add("footer-profile-list-item");
         let githubLink = document.createElement("a");
+        githubLink.classList.add("footer-profile-list-link");
         githubLink.href = "https://github.com/lyndonpanton";
         githubLink.target = "_blank";
         githubLink.textContent = "GitHub";
         github.appendChild(githubLink);
 
         let linkedin = document.createElement("li");
+        linkedin.classList.add("footer-profile-list-item");
         let linkedinLink = document.createElement("a");
+        linkedinLink.classList.add("footer-profile-list-link");
         linkedinLink.href = "https://linkedin.com/in/lyndonpanton";
         linkedinLink.target = "_blank";
         linkedinLink.textContent = "LinkedIn";
@@ -937,26 +1018,37 @@ class UI {
     
     displayFooterProfileLangaugesFrameworks(container) {
         const languagesFrameworks = document.createElement("ul");
+        languagesFrameworks.classList.add(
+            "footer-profile-list",
+            "footer-profile-languages"
+        );
 
         let languagesFrameworksHeading = document.createElement("li");
+        languagesFrameworksHeading.classList.add("footer-profile-list-heading");
         languagesFrameworksHeading.textContent = "Languages and Frameworks";
 
         let html = document.createElement("li");
+        html.classList.add("footer-profile-list-item");
         let htmlLink = document.createElement("a");
+        htmlLink.classList.add("footer-profile-list-link");
         htmlLink.href = "https://developer.mozilla.org/en-US/docs/Web/HTML";
         htmlLink.target = "_blank";
         htmlLink.textContent = "HTML";
         html.appendChild(htmlLink);
 
         let css = document.createElement("li");
+        css.classList.add("footer-profile-list-item");
         let cssLink = document.createElement("a");
+        cssLink.classList.add("footer-profile-list-link");
         cssLink.href = "https://developer.mozilla.org/en-US/docs/Web/CSS";
         cssLink.target = "_blank";
         cssLink.textContent = "CSS";
         css.appendChild(cssLink);
 
         let javaScript = document.createElement("li");
+        javaScript.classList.add("footer-profile-list-item");
         let javaScriptLink = document.createElement("a");
+        javaScriptLink.classList.add("footer-profile-list-link");
         javaScriptLink.href = "https://developer.mozilla.org/en-US/docs/Web/JavaScript";
         javaScriptLink.target = "_blank";
         javaScriptLink.textContent = "JavaScript";
@@ -972,26 +1064,37 @@ class UI {
     
     displayFooterProfileManagersPackages(container) {
         const managersPackagesApis = document.createElement("ul");
+        managersPackagesApis.classList.add(
+            "footer-profile-list",
+            "footer-profile-managers"
+        );
 
         let managersPackagesApisHeading = document.createElement("li");
+        managersPackagesApisHeading.classList.add("footer-profile-list-heading");
         managersPackagesApisHeading.textContent = "Managers, Packages, and APIs";
 
         let npm = document.createElement("li");
+        npm.classList.add("footer-profile-list-item");
         let npmLink = document.createElement("a");
+        npmLink.classList.add("footer-profile-list-link");
         npmLink.href = "https://www.npmjs.com/";
         npmLink.target = "_blank";
         npmLink.textContent = "npm";
         npm.appendChild(npmLink);
 
         let webpack = document.createElement("li");
+        webpack.classList.add("footer-profile-list-item");
         let webpackLink = document.createElement("a");
+        webpackLink.classList.add("footer-profile-list-link");
         webpackLink.href = "https://webpack.js.org/";
         webpackLink.target = "_blank";
         webpackLink.textContent = "Webpack";
         webpack.appendChild(webpackLink);
 
         let visualCrossing = document.createElement("li");
+        visualCrossing.classList.add("footer-profile-list-item");
         let visualCrossingLink = document.createElement("a");
+        visualCrossingLink.classList.add("footer-profile-list-link");
         visualCrossingLink.href = "https://www.visualcrossing.com/";
         visualCrossingLink.target = "_blank";
         visualCrossingLink.textContent = "Visual Crossing";
@@ -1007,12 +1110,19 @@ class UI {
     
     displayFooterProfileMoreProjects(container) {
         const moreProjects = document.createElement("ul");
+        moreProjects.classList.add(
+            "footer-profile-list",
+            "footer-profile-projects"
+        );
 
         let moreProjectsHeading = document.createElement("li");
+        moreProjectsHeading.classList.add("footer-profile-list-heading");
         moreProjectsHeading.textContent = "More Projects";
 
         let pixelArtEditor = document.createElement("li");
+        pixelArtEditor.classList.add("footer-profile-list-item");
         let pixelArtEditorLink = document.createElement("a");
+        pixelArtEditorLink.classList.add("footer-profie-list-link");
         pixelArtEditorLink.href =
                 "https://github.com/lyndonpanton/pixel-art-editor";
         pixelArtEditorLink.target = "_blank";
@@ -1020,7 +1130,9 @@ class UI {
         pixelArtEditor.appendChild(pixelArtEditorLink);
 
         let currencyConvertor = document.createElement("li");
+        currencyConvertor.classList.add("footer-profile-list-item");
         let currencyConvertorLink = document.createElement("a");
+        currencyConvertorLink.classList.add("footer-profie-list-link");
         currencyConvertorLink.href =
                 "https://github.com/lyndonpanton/currency-converter";
         currencyConvertorLink.target = "_blank";
@@ -1028,7 +1140,9 @@ class UI {
         currencyConvertor.appendChild(currencyConvertorLink);
 
         let wordCounter = document.createElement("li");
+        wordCounter.classList.add("footer-profile-list-item");
         let wordCounterLink = document.createElement("a");
+        wordCounterLink.classList.add("footer-profie-list-link");
         wordCounterLink.href =
                 "https://github.com/lyndonpanton/word-counter";
         wordCounterLink.target = "_blank";
@@ -1036,7 +1150,9 @@ class UI {
         wordCounter.appendChild(wordCounterLink);
 
         let taskList = document.createElement("li");
+        taskList.classList.add("footer-profile-list-item");
         let taskListLink = document.createElement("a");
+        taskListLink.classList.add("footer-profie-list-link");
         taskListLink.href =
                 "https://github.com/lyndonpanton/task-list";
         taskListLink.target = "_blank";

@@ -354,5 +354,85 @@ main {
 
 /* Footer *********************************************************************/
 footer {
+    padding: 40px 15vw 8px;
+}
 
+/* Footer Profile */
+.footer-profile {
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 1px solid black;
+}
+
+.footer-profile-list {
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+}
+
+.footer-profile-developer {
+    
+}
+
+.footer-profile-languages {
+
+}
+
+.footer-profile-managers {
+
+}
+
+.footer-profile-projects {
+
+}
+
+.footer-profile-list-heading {
+
+}
+
+.footer-profile-list-item {
+
+}
+
+.footer-profile-list-link {
+
+}
+
+/* Footer Data */
+.footer-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-data-list {
+    display: flex;
+    gap: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+}
+
+.footer-data-legal {
+    justify-content: flex-start;
+}
+
+.footer-data-social {
+    justify-content: flex-end;
+}
+
+.footer-data-list-item {
+
+}
+
+.footer-data-list-link {
+
+}
+
+/* Footer Copyright */
+.footer-copyright {
+    text-align: center;
 }
