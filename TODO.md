@@ -27,9 +27,9 @@ A list of tasks I need to do to complete the weather-app project.
         - [x] Languages and Frameworks
         - [x] Managers, Packages, and APIs
         - [x] More projects
-    - [ ] Data
-        - [ ] Legal
-        - [ ] Social
+    - [x] Data
+        - [x] Legal
+        - [x] Social
     - [x] Copyright
 
 ### Styling
@@ -48,12 +48,15 @@ A list of tasks I need to do to complete the weather-app project.
 - [ ] Add favicon icon
 - [ ] Use icons for social media sites in footer
 
+### Maintenance
+
+- [ ] Split `UI.js` into three different files, for the header content, main
+content and footer content respectively
+
 ### Deployment
 
 - [ ] Bundle project
 - [ ] Add project to portfolio website
-
-### Maintenance
 
 ### Error Handling
 

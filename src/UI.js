@@ -806,14 +806,40 @@ class UI {
     }
 
     displayFooter() {
-        const footer = document.getElementsByTagName("footer")[0];
+        const footer = document.createElement("footer");
 
         this.displayFooterProfile(footer);
         this.displayFooterData(footer);
+        this.displayFooterCopyright(footer);
+
+        document.getElementsByTagName("body")[0].appendChild(footer);
     }
 
     displayFooterCopyright(container) {
         const copyright = document.createElement("p");
+
+        let copyRightSymbol = document.createElement("span");
+        copyRightSymbol.innerHTML = "&copy; ";
+
+        let copyrightYear = document.createElement("span");
+        copyrightYear.textContent = new Date().getFullYear() + " ";
+
+        let copyrightHolder = document.createElement("span");
+        copyrightHolder.textContent = "Lyndon Mykal Panton ";
+
+        let copyRightDivider = document.createElement("span");
+        copyRightDivider.textContent = "| ";
+
+        let copyrightLicense = document.createElement("span");
+        copyrightLicense.textContent = "All Rights Reserved";
+
+        copyright.appendChild(copyRightSymbol);
+        copyright.appendChild(copyrightYear);
+        copyright.appendChild(copyrightHolder);
+        copyright.appendChild(copyRightDivider);
+        copyright.appendChild(copyrightLicense);
+
+        container.appendChild(copyright);
     }
 
     displayFooterData(container) {
