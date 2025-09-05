@@ -1173,6 +1173,9 @@ class UI {
         // Use location storage location on load
 
         this.displayWeatherForm();
+        const weatherData = document.createElement("div");
+        weatherData.id = "weather-current";
+        this.main.appendChild(weatherData);
     }
 
     displayWeatherForm() {
