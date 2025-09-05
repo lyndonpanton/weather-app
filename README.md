@@ -49,6 +49,14 @@ application.
 - [Custom toggle | w3schools](https://www.w3schools.com/howto/howto_css_switch.asp)
 - [Weather icons | Visual Crossing](https://github.com/visualcrossing/WeatherIcons/tree/main/PNG/2nd%20Set%20-%20Color)
 - [Footer font](https://justfreefonts.com/fonts/afacad-flux/)
+- [Favicon (tab icon)](https://favicon.io/favicon-generator/)
+    - Text: W
+    - Background: Rounded
+    - Font Family: Pangolin
+    - Font Variant: Regular 400 Normal
+    - Font Size: 110
+    - Font Color: #FFFFFF
+    - Background Color: #5AF
 
 ## References
 

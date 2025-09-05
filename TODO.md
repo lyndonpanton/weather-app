@@ -16,6 +16,10 @@ A list of tasks I need to do to complete the weather-app project.
 - [Error Handling](#error-handling)
 - [Extension](#extension)
 
+### Meta
+
+- 
+
 ### Content
 
 - [x] Wind speed should use mph as its unit
