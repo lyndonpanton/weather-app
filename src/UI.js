@@ -1122,7 +1122,7 @@ class UI {
         let pixelArtEditor = document.createElement("li");
         pixelArtEditor.classList.add("footer-profile-list-item");
         let pixelArtEditorLink = document.createElement("a");
-        pixelArtEditorLink.classList.add("footer-profie-list-link");
+        pixelArtEditorLink.classList.add("footer-profile-list-link");
         pixelArtEditorLink.href =
                 "https://github.com/lyndonpanton/pixel-art-editor";
         pixelArtEditorLink.target = "_blank";
@@ -1132,7 +1132,7 @@ class UI {
         let currencyConvertor = document.createElement("li");
         currencyConvertor.classList.add("footer-profile-list-item");
         let currencyConvertorLink = document.createElement("a");
-        currencyConvertorLink.classList.add("footer-profie-list-link");
+        currencyConvertorLink.classList.add("footer-profile-list-link");
         currencyConvertorLink.href =
                 "https://github.com/lyndonpanton/currency-converter";
         currencyConvertorLink.target = "_blank";
@@ -1142,7 +1142,7 @@ class UI {
         let wordCounter = document.createElement("li");
         wordCounter.classList.add("footer-profile-list-item");
         let wordCounterLink = document.createElement("a");
-        wordCounterLink.classList.add("footer-profie-list-link");
+        wordCounterLink.classList.add("footer-profile-list-link");
         wordCounterLink.href =
                 "https://github.com/lyndonpanton/word-counter";
         wordCounterLink.target = "_blank";
@@ -1152,7 +1152,7 @@ class UI {
         let taskList = document.createElement("li");
         taskList.classList.add("footer-profile-list-item");
         let taskListLink = document.createElement("a");
-        taskListLink.classList.add("footer-profie-list-link");
+        taskListLink.classList.add("footer-profile-list-link");
         taskListLink.href =
                 "https://github.com/lyndonpanton/task-list";
         taskListLink.target = "_blank";
