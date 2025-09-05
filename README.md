@@ -7,9 +7,8 @@ switch between celsius and fahrenheit units for the temperature.
 
 ## Getting Started
 
-You will need your own [Visual Crossing](https://www.visualcrossing.com/) and
-[Giphy](https://developers.giphy.com/) API keys to be able to use this
-application.
+You may need your own [Visual Crossing](https://www.visualcrossing.com/) API
+key to be able to use this application.
 
 ## Features
 
@@ -28,7 +27,6 @@ application.
 
 ### APIs
 
-- Giphy
 - Visual Crossing
 
 ### Development Tools
