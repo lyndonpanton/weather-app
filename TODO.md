@@ -16,9 +16,25 @@ A list of tasks I need to do to complete the weather-app project.
 - [Error Handling](#error-handling)
 - [Extension](#extension)
 
-### Meta
+### Meta Information
 
-- 
+- html
+    - [x] lang
+- meta
+    - [x] charset
+    - [x] http-equiv
+    - [x] Name
+        - [x] Application name
+        - [x] Author
+        - [x] Creator
+        - [x] Color scheme
+        - [x] Description
+        - [x] Googlebot
+        - [x] Keywords
+        - [x] Publisher
+        - [x] Robots
+        - [x] Theme color
+        - [x] Viewport
 
 ### Content
 
@@ -52,7 +68,7 @@ displayed in
 ### Asset
 
 - [x] Add favicon icon
-- [ ] Use icons for social media sites in footer
+- [x] Use icons for social media sites in footer
 
 ### Maintenance
 
