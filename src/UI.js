@@ -1400,13 +1400,16 @@ class UI {
         // (https://www.uvindextoday.com/uv-index-scale)
         let uvIndex = document.createElement("p");
         uvIndex.classList.add("weather-current-uv-index");
-        uvIndex.textContent = "UV Index: " + day.uvindex;
+        let uvIndexKey = document.createElement("span");
+        uvIndexKey.classList.add("weathehr-current-uv-index-key");
+        uvIndexKey.textContent = "UV Index: " + day.uvindex + " (";
         let uvIndexValue = document.createElement("span");
         uvIndexValue.classList.add("weather-current-uv-index-value");
         uvIndexValue.textContent =
-            " (" + this.getWeatherUVIndexCategory(day.uvindex) + ")";
+            this.getWeatherUVIndexCategory(day.uvindex) + ")";
         uvIndexValue.title = this.getWeatherUVIndexRecommendation(day.uvindex);
 
+        uvIndex.appendChild(uvIndexKey);
         uvIndex.appendChild(uvIndexValue);
 
         let moonPhase = document.createElement("p");
