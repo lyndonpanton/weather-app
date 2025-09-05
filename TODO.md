@@ -51,7 +51,7 @@ displayed in
 
 ### Asset
 
-- [ ] Add favicon icon
+- [x] Add favicon icon
 - [ ] Use icons for social media sites in footer
 
 ### Maintenance

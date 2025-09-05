@@ -40,16 +40,12 @@ application.
 ## Credits
 
 - [Lyndon Mykal Panton (Developer)](https://github.com/lyndonpanton)
-- Background image 1
-    - [Dominik Schröder (Creator)](https://unsplash.com/@wirhabenzeit)
-    - [Photo](https://unsplash.com/photos/white-clouds-during-daytime-FIKD9t5_5zQ)
-- Background image 2
-    - [CHUTTERSNAP (Creator)](https://unsplash.com/@chuttersnap)
+- [CHUTTERSNAP (Background image)](https://unsplash.com/@chuttersnap)
     - [Photo](https://unsplash.com/photos/blue-clouds-under-white-sky-9AqIdzEc9pY)
 - [Custom toggle | w3schools](https://www.w3schools.com/howto/howto_css_switch.asp)
 - [Weather icons | Visual Crossing](https://github.com/visualcrossing/WeatherIcons/tree/main/PNG/2nd%20Set%20-%20Color)
-- [Footer font](https://justfreefonts.com/fonts/afacad-flux/)
-- [Favicon (tab icon)](https://favicon.io/favicon-generator/)
+- [Just Free Fonts (Footer font)](https://justfreefonts.com/fonts/afacad-flux/)
+- [Favicon Generator | Favicon.io](https://favicon.io/favicon-generator/)
     - Text: W
     - Background: Rounded
     - Font Family: Pangolin
@@ -57,7 +53,13 @@ application.
     - Font Size: 110
     - Font Color: #FFFFFF
     - Background Color: #5AF
+- [Font awesome (Social media icons)](https://fontawesome.com/)
+    - [Twitter icon](https://fontawesome.com/icons/twitter?f=brands&s=solid)
+    - [Facebook icon](https://fontawesome.com/icons/facebook?f=brands&s=solid)
+    - [Instagram icon](https://fontawesome.com/icons/instagram?f=brands&s=solid)
 
 ## References
 
+- [Contrast checker | WebAIM](https://webaim.org/resources/contrastchecker/)
+- [CSS Color Filter Generator | ClampCSS](https://clampcss.com/css-filter.html)
 - [UV Index Scale | UV Index Today](https://www.uvindextoday.com/uv-index-scale)

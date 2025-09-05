@@ -472,6 +472,38 @@ footer {
 
 }
 
+.footer-data-list-icon {
+    width: 32px;
+
+    /* #000000 */
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(0%)
+        sepia(2%)
+        saturate(9%)
+        hue-rotate(31deg)
+        brightness(94%)
+        contrast(103%);
+
+    transition: all linear 2.5s;
+}
+
+.footer-data-list-icon:hover {
+    /* #6B6B6B */
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(42%)
+        sepia(11%)
+        saturate(0%)
+        hue-rotate(251deg)
+        brightness(95%)
+        contrast(85%);
+
+    transition: all linear 0.5s;
+}
+
 /* Footer Copyright */
 .footer-copyright {
     padding: 15px 0;

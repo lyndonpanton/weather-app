@@ -769,28 +769,32 @@
 
 // export default UI;
 
-import clearDayIcon from "./icon/weather/clear-day.svg"
-import clearNightIcon from "./icon/weather/clear-night.svg"
-import cloudyIcon from "./icon/weather/cloudy.svg"
-import fogIcon from "./icon/weather/fog.svg"
-import hailIcon from "./icon/weather/hail.svg"
-import partlyCloudlyDayIcon from "./icon/weather/partly-cloudy-day.svg"
-import partlyCloudNightIcon from "./icon/weather/partly-cloudy-night.svg"
-import rainSnowShowersDayIcon from "./icon/weather/rain-snow-showers-day.svg"
-import rainSnowShowersNightIcon from "./icon/weather/rain-snow-showers-night.svg"
-import rainSnowIcon from "./icon/weather/rain-snow.svg"
-import rainIcon from "./icon/weather/rain.svg"
-import showersDayIcon from "./icon/weather/showers-day.svg"
-import showersNightIcon from "./icon/weather/showers-night.svg"
-import sleetIcon from "./icon/weather/sleet.svg"
-import snowShowersDayIcon from "./icon/weather/snow-showers-day.svg"
-import snowShowersNightIcon from "./icon/weather/snow-showers-night.svg"
-import snowIcon from "./icon/weather/snow.svg"
-import thunderRainIcon from "./icon/weather/thunder-rain.svg"
-import thunderShowersDayIcon from "./icon/weather/thunder-showers-day.svg"
-import thunderShowersNightIcon from "./icon/weather/thunder-showers-night.svg"
-import thunderIcon from "./icon/weather/thunder.svg"
-import windIcon from "./icon/weather/wind.svg"
+import clearDayIcon from "./icon/weather/clear-day.svg";
+import clearNightIcon from "./icon/weather/clear-night.svg";
+import cloudyIcon from "./icon/weather/cloudy.svg";
+import fogIcon from "./icon/weather/fog.svg";
+import hailIcon from "./icon/weather/hail.svg";
+import partlyCloudlyDayIcon from "./icon/weather/partly-cloudy-day.svg";
+import partlyCloudNightIcon from "./icon/weather/partly-cloudy-night.svg";
+import rainSnowShowersDayIcon from "./icon/weather/rain-snow-showers-day.svg";
+import rainSnowShowersNightIcon from "./icon/weather/rain-snow-showers-night.svg";
+import rainSnowIcon from "./icon/weather/rain-snow.svg";
+import rainIcon from "./icon/weather/rain.svg";
+import showersDayIcon from "./icon/weather/showers-day.svg";
+import showersNightIcon from "./icon/weather/showers-night.svg";
+import sleetIcon from "./icon/weather/sleet.svg";
+import snowShowersDayIcon from "./icon/weather/snow-showers-day.svg";
+import snowShowersNightIcon from "./icon/weather/snow-showers-night.svg";
+import snowIcon from "./icon/weather/snow.svg";
+import thunderRainIcon from "./icon/weather/thunder-rain.svg";
+import thunderShowersDayIcon from "./icon/weather/thunder-showers-day.svg";
+import thunderShowersNightIcon from "./icon/weather/thunder-showers-night.svg";
+import thunderIcon from "./icon/weather/thunder.svg";
+import windIcon from "./icon/weather/wind.svg";
+
+import twitterIcon from "./icon/social/twitter.svg";
+import facebookIcon from "./icon/social/facebook.svg";
+import instagramIcon from "./icon/social/instagram.svg";
 
 class UI {
     constructor(weather) {
@@ -924,7 +928,15 @@ class UI {
         twitterLink.classList.add("footer-data-list-link");
         twitterLink.href = "https://twitter.com";
         twitterLink.target = "_blank";
-        twitterLink.textContent = "Twitter";
+        // twitterLink.textContent = "Twitter";
+        let twitterImage = document.createElement("img");
+        twitterImage.classList.add(
+            "footer-data-list-icon",
+            "footer-data-list-icon-twitter"
+        );
+        twitterImage.alt = "Twitter logo";
+        twitterImage.src = twitterIcon;
+        twitterLink.appendChild(twitterImage)
         twitter.appendChild(twitterLink);
     
         let facebook = document.createElement("li");
@@ -936,7 +948,15 @@ class UI {
         facebookLink.classList.add("footer-data-list-link");
         facebookLink.href = "https://facebook.com";
         facebookLink.target = "_blank";
-        facebookLink.textContent = "Facebook";
+        // facebookLink.textContent = "Facebook";
+        let facebookImage = document.createElement("img");
+        facebookImage.classList.add(
+            "footer-data-list-icon",
+            "footer-data-list-icon-facebook"
+        );
+        facebookImage.alt = "Facebook logo";
+        facebookImage.src = facebookIcon;
+        facebookLink.appendChild(facebookImage)
         facebook.appendChild(facebookLink);
     
         let instagram = document.createElement("li");
@@ -948,7 +968,15 @@ class UI {
         instagramLink.classList.add("footer-data-list-link");
         instagramLink.href = "https://instagram.com";
         instagramLink.target = "_blank";
-        instagramLink.textContent = "Instagram";
+        // instagramLink.textContent = "Instagram";
+        let instagramImage = document.createElement("img");
+        instagramImage.classList.add(
+            "footer-data-list-icon",
+            "footer-data-list-icon-instagram"
+        );
+        instagramImage.alt = "Instagram logo";
+        instagramImage.src = instagramIcon;
+        instagramLink.appendChild(instagramImage)
         instagram.appendChild(instagramLink);
     
         social.appendChild(twitter);
