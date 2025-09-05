@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Pangolin
+- Font Author: undefined
+- Font Source: https://fonts.gstatic.com/s/pangolin/v11/cY9GfjGcW0FPpi-tWPfK5d3aiLBG.ttf
+- Font License: undefined)

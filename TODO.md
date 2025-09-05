@@ -40,7 +40,7 @@ A list of tasks I need to do to complete the weather-app project.
 - [x] Only underline the text message for uv index (not number)
 - [x] Position footer elements
 - [x] Style footer elements
-- [ ] Before content is displayed, empty space occupy the area it will be
+- [x] Before content is displayed, empty space occupy the area it will be
 displayed in
 
 ### Functionality
